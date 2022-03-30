@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 10:50:11 by rprieto-          #+#    #+#             */
-/*   Updated: 2019/11/21 15:50:53 by rprieto-         ###   ########.fr       */
+/*   Created: 2019/11/06 15:47:11 by vnastase          #+#    #+#             */
+/*   Updated: 2021/09/17 14:39:51 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_toupper(int c)
+#include "libft.h"
+
+int	ft_toupper(int c)
 {
-	return (c >= 'a' && c <= 'z') ? (c - 32) : (c);
+	int	uppercase;
+
+	uppercase = c;
+	if (c >= 97 && c <= 122)
+	{
+		uppercase = c - 32;
+		return (uppercase);
+	}
+	return (uppercase);
 }

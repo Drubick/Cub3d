@@ -3,7 +3,7 @@
 
 void    error_manager(int conditional)
 {
-
+    conditional++;
 }
 
 

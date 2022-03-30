@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 16:38:16 by rprieto-          #+#    #+#             */
-/*   Updated: 2020/10/15 12:09:24 by rprieto-         ###   ########.fr       */
+/*   Created: 2019/11/12 15:23:51 by vnastase          #+#    #+#             */
+/*   Updated: 2021/09/15 13:31:55 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 t_bool	ft_isdigit(int c)
 {
-	return (c >= '0' && c <= '9') ? true : false;
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 11:17:51 by rprieto-          #+#    #+#             */
-/*   Updated: 2019/11/12 12:15:06 by rprieto-         ###   ########.fr       */
+/*   Created: 2019/11/06 15:47:11 by vnastase          #+#    #+#             */
+/*   Updated: 2021/09/17 14:39:42 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_tolower(int c)
+#include "libft.h"
+
+int	ft_tolower(int c)
 {
-	return (c >= 'A' && c <= 'Z') ? (c + 32) : (c);
+	int	uppercase;
+
+	uppercase = c;
+	if (c >= 65 && c <= 90)
+	{
+		uppercase = c + 32;
+		return (uppercase);
+	}
+	return (uppercase);
 }

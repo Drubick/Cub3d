@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstdbl_size.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/21 11:46:41 by rprieto-          #+#    #+#             */
-/*   Updated: 2019/11/26 17:56:41 by rprieto-         ###   ########.fr       */
+/*   Created: 2021/03/20 00:36:48 by rprieto-          #+#    #+#             */
+/*   Updated: 2021/09/15 13:22:19 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_lstsize(t_list *lst)
+int	ft_lstdbl_size(t_list_dbl *lst)
 {
-	int		size;
+	int	size;
 
 	size = 0;
 	while (lst)

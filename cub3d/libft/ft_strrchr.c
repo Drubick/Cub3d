@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 11:50:14 by rprieto-          #+#    #+#             */
-/*   Updated: 2019/11/22 12:21:40 by rprieto-         ###   ########.fr       */
+/*   Created: 2019/11/12 15:38:55 by vnastase          #+#    #+#             */
+/*   Updated: 2019/12/11 11:19:45 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,24 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int		i;
-	int		last_ocurrence;
-	char	*string;
+	char	*pointer;
+	int		s_len;
 
-	string = (char*)s;
-	i = 0;
-	last_ocurrence = -1;
-	while (string[i])
-	{
-		if (string[i] == c)
-			last_ocurrence = i;
-		i++;
-	}
+	s_len = ft_strlen(s);
+	pointer = (char *)s + s_len - 1;
 	if (c == '\0')
-		return (&string[i]);
-	return (last_ocurrence != -1) ? &string[last_ocurrence] : NULL;
+	{
+		pointer++;
+		return (pointer);
+	}
+	while (s_len != 0)
+	{
+		if (*pointer == c)
+		{
+			return (pointer);
+		}
+		s_len--;
+		pointer--;
+	}
+	return (NULL);
 }

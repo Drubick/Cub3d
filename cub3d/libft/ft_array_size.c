@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_array_size.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/21 11:54:00 by rprieto-          #+#    #+#             */
-/*   Updated: 2019/12/03 19:01:33 by rprieto-         ###   ########.fr       */
+/*   Created: 2021/09/15 13:20:34 by vnastase          #+#    #+#             */
+/*   Updated: 2021/09/15 13:20:36 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-t_list	*ft_lstlast(t_list *lst)
+int	ft_array_size(void **array)
 {
-	if (lst == 0)
-		return (lst);
-	else
-		while (lst->next != 0)
-			lst = lst->next;
-	return (lst);
+	int	i;
+
+	i = 0;
+	if (!array)
+		return (0);
+	while (((char **)array)[i])
+		i++;
+	return (i);
 }

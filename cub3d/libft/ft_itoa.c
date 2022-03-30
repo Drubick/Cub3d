@@ -3,46 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 12:24:49 by rprieto-          #+#    #+#             */
-/*   Updated: 2020/10/14 18:47:34 by rprieto-         ###   ########.fr       */
+/*   Created: 2019/12/05 11:17:56 by vnastase          #+#    #+#             */
+/*   Updated: 2021/09/17 14:26:02 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void		fill_nbr(char *string, unsigned int index, long int number)
+int	ft_count_nb(int nb)
 {
-	if (number >= 10)
+	int				count;
+	unsigned int	c;
+
+	c = 0;
+	count = 0;
+	if (nb < 0)
 	{
-		fill_nbr(string, index - 1, number / 10);
-		string[index] = (number % 10) + 48;
+		c = nb * -1;
+		count++;
 	}
-	else
-		string[index] = number + 48;
+	if (nb > 0)
+		c = nb;
+	while (c >= 10)
+	{
+		c = c / 10;
+		count++;
+	}
+	if (c < 10)
+		count++;
+	return (count);
 }
 
-char			*ft_itoa(int n)
+void	ft_putnum(char *s, int n, int l)
 {
-	char			*string;
-	long int		n_copy;
-	unsigned int	digits;
-	unsigned int	index;
+	unsigned int	c;
 
+	c = 0;
+	s[l--] = '\0';
 	if (n == 0)
-		return (ft_strdup("0"));
-	digits = ft_nbrlen(n);
-	n_copy = n;
-	index = digits - 1;
-	if (!(string = (char*)malloc((digits + 1) * sizeof(char))))
-		return (NULL);
-	if (n_copy < 0)
+		s[0] = '0';
+	if (n < 0)
 	{
-		string[0] = '-';
-		n_copy = -n_copy;
+		s[0] = '-';
+		c = n * -1;
 	}
-	fill_nbr(string, index, n_copy);
-	string[digits] = '\0';
-	return (string);
+	if (n > 0)
+		c = n;
+	while (c > 10 || (c <= 10 && c != 0))
+	{
+		s[l--] = c % 10 + 48;
+		c = c / 10;
+	}
+}
+
+char	*ft_itoa(int n)
+{
+	char	*new;
+	int		l;
+
+	if (n < -2147483648)
+		return (NULL);
+	l = ft_count_nb(n);
+	new = (char *)malloc(sizeof(char) * l + 1);
+	if (new == 0)
+		return (NULL);
+	ft_putnum(new, n, l);
+	return (new);
 }

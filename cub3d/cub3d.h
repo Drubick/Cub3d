@@ -14,10 +14,14 @@ typedef struct s_info
     int char_position;
     int parse;
     char **map;
+    char *file;
+    t_list file_aux;
    // int error_code;
 }       t_info;
+
 
 //MAP FUNCTIONS
 int map_scan(t_info *info);
 int parse(t_info *info, char**argv, char argc);
+int file_scan(t_list *file_aux, char *file, t_info *info)
 #endif

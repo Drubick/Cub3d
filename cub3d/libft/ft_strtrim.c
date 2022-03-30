@@ -3,57 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 17:58:49 by rprieto-          #+#    #+#             */
-/*   Updated: 2019/11/27 17:39:21 by rprieto-         ###   ########.fr       */
+/*   Created: 2019/11/15 13:20:54 by vnastase          #+#    #+#             */
+/*   Updated: 2021/09/17 14:39:23 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		get_limit(char const *string, char const *set, int flag)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	int	position;
-	int	sum;
+	size_t	start;
+	size_t	len;
 
-	if (flag == 1)
-	{
-		sum = 1;
-		position = 0;
-	}
-	else
-	{
-		sum = -1;
-		position = ft_strlen((char*)string) - 1;
-	}
-	while (position != -1 && string[position] && ft_checkchar(string[position],
-	(char*)set))
-		position += sum;
-	return (position);
-}
-
-char			*ft_strtrim(char const *s1, char const *set)
-{
-	unsigned int	start;
-	unsigned int	end;
-	unsigned int	i;
-	char			*new_string;
-
-	if (!s1 || !set)
+	if (s1 == NULL || set == NULL)
 		return (NULL);
-	start = get_limit(s1, set, 1);
-	end = get_limit(s1, set, -1) + 1;
-	if (end == 0)
-		return (ft_strdup(""));
-	if (!(new_string = (char*)malloc(((end - start) + 1) * sizeof(char))))
-		return (NULL);
-	i = 0;
-	while ((i + start) < end)
-	{
-		new_string[i] = s1[i + start];
-		i++;
-	}
-	new_string[i] = '\0';
-	return (new_string);
+	start = 0;
+	while (s1[start] && ft_strchr(set, s1[start]) != NULL)
+		start++;
+	len = ft_strlen(&s1[start]);
+	if (len != 0)
+		while (s1[start + len - 1]
+			&& ft_strchr(set, s1[start + len - 1]) != NULL)
+			len--;
+	return (ft_substr(s1, start, len));
 }

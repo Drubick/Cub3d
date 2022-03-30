@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_move_backwards.c                            :+:      :+:    :+:   */
+/*   ft_lstmove_backwards.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 12:24:24 by rprieto-          #+#    #+#             */
-/*   Updated: 2020/12/16 12:25:57 by rprieto-         ###   ########.fr       */
+/*   Updated: 2021/09/15 13:22:29 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstmove_backwards(t_list *lst)
 {
-	void *aux;
+	void	*aux;
 
 	if (lst->next)
 	{

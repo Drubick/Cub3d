@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 10:26:38 by rprieto-          #+#    #+#             */
-/*   Updated: 2020/10/15 12:09:11 by rprieto-         ###   ########.fr       */
+/*   Created: 2019/11/12 15:29:43 by vnastase          #+#    #+#             */
+/*   Updated: 2021/09/15 13:32:01 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 t_bool	ft_isascii(int c)
 {
-	return (c >= 0 && c <= 127) ? true : false;
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
 }

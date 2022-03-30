@@ -3,83 +3,101 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/19 11:15:03 by rprieto-          #+#    #+#             */
-/*   Updated: 2019/11/28 11:08:18 by rprieto-         ###   ########.fr       */
+/*   Created: 2019/11/18 12:21:10 by vnastase          #+#    #+#             */
+/*   Updated: 2021/09/17 14:33:35 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
+#include <unistd.h>
 
-unsigned int	get_word_count(char *string, char delimiter)
+#include "libft.h"
+
+static int	numstring(char const *s1, char c)
 {
-	int				i;
-	unsigned int	word_count;
+	int	comp;
+	int	cles;
 
-	i = 0;
-	word_count = 0;
-	if (ft_strlen(string) == 0)
+	comp = 0;
+	cles = 0;
+	if (*s1 == '\0')
 		return (0);
-	if (i == 0 && string[0] != delimiter)
-		word_count++;
-	while (string[i])
+	while (*s1 != '\0')
 	{
-		if (string[i] == delimiter)
+		if (*s1 == c)
+			cles = 0;
+		else if (cles == 0)
 		{
-			if (string[i + 1] != delimiter && string[i + 1])
-				word_count++;
+			cles = 1;
+			comp++;
 		}
+		s1++;
+	}
+	return (comp);
+}
+
+static int	numchar(char const *s2, char c, int i)
+{
+	int	lenght;
+
+	lenght = 0;
+	while (s2[i] != c && s2[i] != '\0')
+	{
+		lenght++;
 		i++;
 	}
-	return (word_count);
+	return (lenght);
 }
 
-unsigned int	word_length(char *string, unsigned int index, char delimiter)
+static char	**freee(char const **dst, int j)
 {
-	unsigned int word_length;
-
-	word_length = 0;
-	while (string[index] && string[(index)++] != delimiter)
-		word_length++;
-	return (word_length);
-}
-
-void			go_next_word(char *string, unsigned int *index, char delimiter)
-{
-	if (!(*index == 0 && string[*index] != delimiter))
+	while (j > 0)
 	{
-		while (string[*index] != delimiter)
-			(*index)++;
-		while (string[*index] == delimiter)
-			(*index)++;
+		j--;
+		free((void *)dst[j]);
 	}
+	free(dst);
+	return (NULL);
 }
 
-char			**ft_split(char const *s, char c)
+static char	**affect(char const *s, char **dst, char c, int l)
 {
-	char			**phrase;
-	char			*word;
-	unsigned int	index;
-	unsigned int	word_size;
-	unsigned int	word_index;
+	int	i;
+	int	j;
+	int	k;
 
-	index = 0;
-	word_index = 0;
-	if (!s)
-		return (NULL);
-	if (!(phrase = (char**)malloc((get_word_count((char*)s, c) + 1)
-		* sizeof(char*))))
-		return (NULL);
-	while (word_index < get_word_count((char*)s, c))
+	i = 0;
+	j = 0;
+	while (s[i] != '\0' && j < l)
 	{
-		go_next_word((char*)s, &index, c);
-		word_size = word_length((char*)s, index, c);
-		if (!(word = ft_substr(s, index, word_size)))
-			return (NULL);
-		index += word_size;
-		phrase[word_index++] = word;
+		k = 0;
+		while (s[i] == c)
+			i++;
+		dst[j] = (char *)malloc(sizeof(char) * numchar(s, c, i) + 1);
+		if (dst[j] == NULL)
+			return (freee((char const **)dst, j));
+		while (s[i] != '\0' && s[i] != c)
+			dst[j][k++] = s[i++];
+		dst[j][k] = '\0';
+		j++;
 	}
-	phrase[word_index] = NULL;
-	return (phrase);
+	dst[j] = 0;
+	return (dst);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**dst;
+	int		l;
+
+	if (s == NULL)
+		return (NULL);
+	l = numstring(s, c);
+	dst = (char **)malloc(sizeof(char *) * (l + 1));
+	if (dst == NULL)
+		return (NULL);
+	return (affect(s, dst, c, l));
 }

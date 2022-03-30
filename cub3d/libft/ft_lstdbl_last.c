@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
+/*   ft_lstdbl_last.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 18:32:24 by rprieto-          #+#    #+#             */
-/*   Updated: 2019/12/03 18:59:37 by rprieto-         ###   ########.fr       */
+/*   Created: 2021/09/15 13:21:56 by vnastase          #+#    #+#             */
+/*   Updated: 2021/09/15 13:21:57 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+t_list_dbl	*ft_lstdbl_last(t_list_dbl *lst)
 {
-	new->next = lst[0];
-	lst[0] = new;
+	if (lst == 0)
+		return (lst);
+	else
+		while (lst->next != 0)
+			lst = lst->next;
+	return (lst);
 }
