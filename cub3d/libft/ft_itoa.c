@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 11:17:56 by vnastase          #+#    #+#             */
-/*   Updated: 2021/09/17 14:26:02 by vnastase         ###   ########.fr       */
+/*   Updated: 2022/04/15 13:13:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*ft_itoa(int n)
 	char	*new;
 	int		l;
 
-	if (n < -2147483648)
+	if (n < -2147483647)
 		return (NULL);
 	l = ft_count_nb(n);
 	new = (char *)malloc(sizeof(char) * l + 1);

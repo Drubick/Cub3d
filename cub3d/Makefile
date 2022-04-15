@@ -1,9 +1,11 @@
-NAME				= ccub.3d
+NAME				= cub_3d
 
 FOLDER				= src/
 
 SRCS 			=  main.c\
-					parse.c
+					parse.c\
+					array_parse.c\
+					array_parse_map.c
 
 OBJS				= ${SRCS:.c=.o}
 
@@ -14,9 +16,8 @@ RM					= rm -f
 
 $(NAME):	${OBJS}
 			cd libft && make
-			cd minilibx && make
-			#$(CC) $(CFLAGS) ${OBJ} libft/libft.a -l mlx -framework OpenGL -framework AppKit -o $(NAME)
-			$(CC) $(CFLAGS) ${OBJS} libft/libft.a -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+			#$(CC) $(CFLAGS) ${OBJ} libft/libft.a 
+			$(CC) $(CFLAGS) ${OBJS} libft/libft.a 
 
 all:		${NAME}
 
