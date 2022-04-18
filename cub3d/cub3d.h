@@ -17,8 +17,11 @@ typedef struct s_info
     int player_position_y;
     char player_direction;
     int parse;
+    //map
+    int longest_line;
     char **map;
     char **file;
+    char **array_spaces;
     t_list file_aux;
     int file_last_line;
     int file_map_first_line;
@@ -37,6 +40,9 @@ int map_scan(t_info *info);
 int parse(t_info *info, char**argv, char argc);
 int file_scan(t_list **file_list, char *file, t_info *info);
 void info_to_array(t_info *info, t_list *file_list);
+void info_to_array_aux(t_info *info);
+int     fill_with_spaces(t_info *info);
+void    get_longest_line(t_info *info);
 //checks if the file is good
 int arry_parse(t_info *info);
 //checks textures

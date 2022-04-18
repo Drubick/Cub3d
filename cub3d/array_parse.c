@@ -14,8 +14,8 @@ int arry_parse(t_info *info)
         if (no_longer_textures == 0)
         {
             if ((texture_check_save(info->file[y], y, info) == 1))
-               y = y + 0;
-        }           
+                y = y + 0;
+        }
         else if ((map_check(info->file, y, info)) == 0)
                // map_saving(y, info);
             //else

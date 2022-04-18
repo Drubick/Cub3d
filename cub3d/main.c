@@ -15,7 +15,7 @@ int main(int argc, char **argv)
     initialize_textures(&info);
     if((parse(&info, argv, argc)) != 0)
         error_manager(info.parse);\
-    printf("%s ", info.N_texture_path);
+   // printf("%s ", info.N_texture_path);
   //      printf("%s", info.E_texture_path);
 
   //  printf("%s", info.S_texture_path);

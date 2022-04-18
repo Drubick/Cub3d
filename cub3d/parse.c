@@ -16,7 +16,7 @@ int parse(t_info *info, char**argv, char argc)
 
 
     info->parse = arry_parse(info);
-        return(info->parse);
+    return(info->parse);
 }
 
 //scans the file and saves it into a list
@@ -53,7 +53,7 @@ void info_to_array(t_info *info, t_list *file_list)
   int i;
 
 	j = 0;
-	info->file = ft_calloc(ft_lstsize(file_list) + 1, sizeof(char *));
+	info->file = ft_calloc(ft_lstsize(file_list) + 2, sizeof(char *));
 	while (file_list)
 	{
 		info->file[j] = ((char *)file_list->content);
@@ -62,21 +62,83 @@ void info_to_array(t_info *info, t_list *file_list)
 	}
     j = 0;
     i = 0;
+    info_to_array_aux(info);
+    fill_with_spaces(info);
+}
+
+void    get_longest_line(t_info *info)
+{
+    int i;
+    int j;
+
+    j = 0;
+    i = 0;
     while(info->file[j])
     {
-        while (info->file[j][i])
-        {
+        while(info->file[j][i])
             i++;
-     
-           
-        }
-               info->file[j][i] = '\n';
-         printf("%s", info->file[j]);
+        if (i > info->longest_line)
+            info->longest_line = i;
         i = 0;
         j++;
     }
-    
-    
+    info->file_last_line = j;
+}
+
+int    fill_with_spaces(t_info *info)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    get_longest_line(info);
+    info->array_spaces = malloc((info->file_last_line) * sizeof(char *));
+    while(j < info->file_last_line)
+    {
+        info->array_spaces[j] = malloc((info->longest_line + 2) * sizeof(char));
+        j++;
+    }
+    j = 0;
+    while(info->file[j])
+    {
+            while(info->file[j][i])
+            {
+                info->array_spaces[j][i] = info->file[j][i];
+                i++;
+            }
+            while(i < (info->longest_line))
+            {
+                if(i < 2)
+                    info->array_spaces[j][i] = ' ';
+                else
+                    info->array_spaces[j][i-2] = ' ';
+                    i++;
+            }
+            info->array_spaces[j][i-2] = '\n';
+            info->array_spaces[j][i-1] = '\0';
+            i = 0;
+            j++;
+    }
+    return(1);
+}
+
+void info_to_array_aux(t_info *info)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while(info->file[j])
+    {
+       while (info->file[j][i])
+            i++;
+        info->file[j][i] = '\n';
+        info->file[j][i + 1] = '\0';
+        i = 0;
+        j++;
+    }
 	info->file[j] = NULL;
 }
 
