@@ -1,6 +1,8 @@
 #include "cub3d.h"
 #include <unistd.h>
 
+
+// EN EL MAPA TIENES QUE CAMBIAR EL ARRAY QUE UTILIZAS
 int arry_parse(t_info *info)
 {
     int y;
