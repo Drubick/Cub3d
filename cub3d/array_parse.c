@@ -10,19 +10,17 @@ int arry_parse(t_info *info)
 
     y = 0;
     no_longer_textures = 0;
-    while(info->file[y])
+    while(no_longer_textures == 0 || no_longer_textures == 1)
     {
-        printf("%s",info->file[y]);
-        if (no_longer_textures == 0)
-        {
-            if ((texture_check_save(info->file[y], y, info) == 1))
-                y = y + 0;
-        }
-        else if ((map_check(info->file, y, info)) == 0)
-               // map_saving(y, info);
-            //else
+        no_longer_textures = texture_check_save(info->file[y], y, info);
+        if (no_longer_textures == 1)
             return(1);
         y++;
+    }
+    if(map_check(y, info) == 0)
+    {
+        printf("hola\n");
+        map_saving(y, info);
     }
     return(0);
 }
@@ -40,9 +38,9 @@ int texture_check_save(char *texture, int y, t_info *info)
         returnal = texture_W(texture, info);
     else if (y == 3)
         returnal = texture_E(texture, info);
-    else if (y == 4)
-        returnal = texture_F(texture, info);
     else if (y == 5)
+        returnal = texture_F(texture, info);
+    else if (y == 6)
         returnal = texture_C(texture, info);
 
     return (returnal);
@@ -67,8 +65,6 @@ int texture_N(char *texture, t_info *info)
 
 int texture_S(char* texture, t_info *info)
 {
-
-    printf("%s", texture);
     int x;
 
     x = 0;
@@ -110,7 +106,7 @@ int texture_E(char* texture, t_info *info)
         return(1);
     while(texture[x])
     {
-        info->E_texture_path[x-3] = texture[x];
+        info->E_texture_path[x - 3] = texture[x];
         x++;
     }
     texture[x] = '\0';

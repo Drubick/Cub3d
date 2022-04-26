@@ -1,0 +1,34 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "gcc build push_swap",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-g",
+                "-I${workspaceFolder}",
+                "${workspaceFolder}/*.c",
+                "${workspaceFolder}/libft/libft.a",
+                "-I${workspaceFolder}/libft",
+                "-o",
+                "${workspaceFolder}/cub3d.out"
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            }
+        },
+        {
+            "type": "shell",
+            "label": "make active project",
+            "command": "/usr/bin/make",
+            "args": [
+                "-C",
+                "${workspaceFolder}"
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            }
+        }
+    ],
+    "version": "2.0.0"
+}
