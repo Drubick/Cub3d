@@ -25,9 +25,11 @@ int file_scan(t_list **file_list, char *file, t_info *info)
     char    *buffer;
     buffer = NULL;
     *file_list = NULL;
+    control_line = 12;
     file_descriptor = open(file, O_RDONLY);
     if (file_descriptor == -1)
         return (2);
+    
     while (control_line != 0)
     {
         control_line = get_next_line(file_descriptor, &buffer);
@@ -41,17 +43,24 @@ int file_scan(t_list **file_list, char *file, t_info *info)
 void info_to_array(t_info *info, t_list *file_list)
 {
     int	j;
+    int i;
 
 	j = 0;
-	info->file = ft_calloc(ft_lstsize(file_list) + 2, sizeof(char *));
+	info->file = ft_calloc(ft_lstsize(file_list) + 1, sizeof(char *));
 	while (file_list)
 	{
-		info->file[j] = ((char *)file_list->content);
+        info->file[j] = ft_calloc(ft_strlen(file_list->content) + 2, sizeof(char));
+        i = 0;
+        while (((char *)file_list->content)[i])
+        {
+            info->file[j][i] = ((char *)file_list->content)[i];
+            i++;
+        }
+        info->file[j][i] = '\n';
 		file_list = file_list->next;
 		j++;
 	}
-    j = 0;
-    info_to_array_aux(info);
+    //info_to_array_aux(info);
     fill_with_spaces(info);
 }
 
@@ -82,7 +91,7 @@ int    fill_with_spaces(t_info *info)
     i = 0;
     j = 0;
     get_longest_line(info);
-    info->array_spaces = malloc((info->file_last_line) * sizeof(char *));
+    info->array_spaces = malloc((info->file_last_line + 1) * sizeof(char *));
     while (j <= info->file_last_line)
     {
         info->array_spaces[j] = malloc((info->longest_line + 2) * sizeof(char));
@@ -108,11 +117,10 @@ int    fill_with_spaces(t_info *info)
             }
             info->array_spaces[j][i - 2] = '\n';
             info->array_spaces[j][i - 1] = '\0';
-            printf("%s", info->file[j]);
             i = 0;
             j++;
     }
-    info->array_spaces[j] = '\0';
+    info->array_spaces[j] = NULL;
     return (0);
 }
 
@@ -133,5 +141,5 @@ void info_to_array_aux(t_info *info)
         i = 0;
         j++;
     }
-	info->file[j] = NULL;
+	//info->file[j] = '\0';
 }

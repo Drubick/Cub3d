@@ -46,31 +46,31 @@ int texture_N(char *texture, t_info *info)
 {
     int x;
 
-    x = 0;
-    if(texture[x++] != 'N' && texture[x++] != 'O' && texture[x++] != ' ')
+    x = 3;
+    if(ft_strncmp("NO ", texture, 3) != 0)
         return(1);
+    info->N_texture_path = ft_calloc((ft_strlen(texture) - 2), sizeof(char));
     while(texture[x])
     {
         info->N_texture_path[x-3] = texture[x];
         x++;
     }
-        texture[x] = '\0';
     return (0);
 }
 
 int texture_S(char* texture, t_info *info)
 {
     int x;
-
-    x = 0;
-    if (texture[x++] != 'S' && texture[x++] != 'O' && texture[x++] != ' ')
+    
+    x = 3;
+    if(ft_strncmp("SO ", texture, 3) != 0)
         return(1);
+    info->S_texture_path = ft_calloc((ft_strlen(texture) - 2), sizeof(char));
     while (texture[x])
     {
         info->S_texture_path[x-3] = texture[x];
         x++;
     }
-    texture[x] = '\0';
     return (0);
 }
 
@@ -78,15 +78,15 @@ int texture_W(char* texture, t_info *info)
 {
     int x;
 
-    x = 0;
-    if (texture[x++] != 'W' && texture[x++] != 'O' && texture[x++] != ' ')
+    x = 3;
+    if(ft_strncmp("WE ", texture, 3) != 0)
         return (1);
+    info->W_texture_path = ft_calloc((ft_strlen(texture) - 2), sizeof(char));
     while (texture[x])
     {
-        info->E_texture_path[x-3] = texture[x];
+        info->W_texture_path[x-3] = texture[x];
         x++;
     }
-        texture[x] = '\0';
 
     return (0);
 }
@@ -95,15 +95,16 @@ int texture_E(char* texture, t_info *info)
 {
     int x;
 
-    x = 0;
-    if (texture[x++] != 'E' && texture[x++] != 'O' && texture[x++] != ' ')
+    x = 3;
+   
+    if(ft_strncmp("EA ", texture, 3) != 0)
         return (1);
+    info->E_texture_path = ft_calloc((ft_strlen(texture) - 2), sizeof(char));
     while (texture[x])
     {
         info->E_texture_path[x - 3] = texture[x];
         x++;
     }
-    texture[x] = '\0';
     return (0);
 }
 
@@ -113,15 +114,15 @@ int texture_F(char* texture, t_info *info)
 {
     int x;
 
-    x = 0;
-    if (texture[x++] != 'F' && texture[x++] != ' ')
+    x = 2;
+    if(ft_strncmp("F ", texture, 2) != 0)
         return (1);
+    info->F_color = ft_calloc((ft_strlen(texture) - 1), sizeof(char));
     while (texture[x])
     {
-        info->F_color[x-2] = texture[x];
+        info->F_color[x - 2] = texture[x];
         x++;
     }
-        texture[x] = '\0';
 
     return (0);
 }
@@ -131,15 +132,15 @@ int texture_C(char* texture, t_info *info)
 {
     int x;
 
-    x = 0;
-    if (texture[x++] != 'C' && texture[x++] != ' ')
+    x = 2;
+   if(ft_strncmp("C ", texture, 2) != 0)
         return(1);
+    info->C_color = ft_calloc((ft_strlen(texture) - 1), sizeof(char));    
     while (texture[x])
     {
         info->C_color[x-2] = texture[x];
         x++;
     }
-        texture[x] = '\0';
 
     return (2);
 }

@@ -31,18 +31,14 @@ int main(int argc, char **argv)
 void	initialize_info(t_info *info)
 {
 	ft_memset(info, 0, sizeof(info));
-	initialize_textures(info);
+	//initialize_textures(info);
 	initialize_ray(info);
 }
 
 void	initialize_textures(t_info *info)
  {
-    info->N_texture_path = ft_calloc(100, sizeof(char *));
-    info->S_texture_path = ft_calloc(100, sizeof(char *));
-    info->E_texture_path = ft_calloc(100, sizeof(char *));
-    info->W_texture_path = ft_calloc(100, sizeof(char *));
-    info->F_color = ft_calloc(100, sizeof(char *));
-    info->C_color = ft_calloc(100, sizeof(char *));
+    info->F_color = ft_calloc(100, sizeof(char));
+    info->C_color = ft_calloc(100, sizeof(char));
  }
 
  void	initialize_ray(t_info *info)

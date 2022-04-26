@@ -13,8 +13,7 @@ int map_check(int y, t_info *info)
     {
         while(info->array_spaces[y][x])
         {
-            error = map_check_aux(info) == 0
-        }
+            error = map_check_aux(info, y, x, error);
             x++;
         }
         x = 0;
@@ -23,14 +22,14 @@ int map_check(int y, t_info *info)
     return (error);
 }
 
-void    map_check_aux(t_info *info)
+int    map_check_aux(t_info *info, int y, int x, int error)
 {
     if(y == info->file_last_line || y == info->file_map_first_line)
     {
         if(info->array_spaces[y][x] != '1' && info->array_spaces[y][x] != ' ' && info->array_spaces[y][x] != '\n') 
             return(1);
     }
-    else if(!ft_strchr(" SE10WN", info->array_spaces[y][x]))
+    else if(!ft_strchr(" SE10WN\n", info->array_spaces[y][x]))
             return(1);
     else if(info->array_spaces[y][x] != '\n' && y != info->file_last_line && error == 0 &&
     y != info->file_map_first_line)
@@ -42,13 +41,16 @@ void    map_check_aux(t_info *info)
         else if (info->array_spaces[y][x] == ' ')
             error = map_check_space(info, y, x);
     }
+    return(error);
 }
 
 int map_check_0( t_info *info, int y, int x)
 {
-    if (!ft_strchr(" \n", info->array_spaces[y -1][x])||
-        !ft_strchr(" \n", info->array_spaces[y + 1][x]) ||
-        !ft_strchr(" \n", info->array_spaces[y][x + 1]) || 
+    if (x == 0)
+        return (1);
+    if (!ft_strchr("01NSWE", info->array_spaces[y -1][x])||
+        !ft_strchr("01NSWE", info->array_spaces[y + 1][x]) ||
+        !ft_strchr("01NSWE", info->array_spaces[y][x + 1]))
         return(1);
     else
         return(0);
@@ -61,10 +63,12 @@ int map_check_player(int y, int x, t_info *info)
     info->player_direction = info->array_spaces[y][x];
     info->array_spaces[y][x] = '0';
 
-    if (!ft_strchr(" \n", info->array_spaces[y -1][x])||
-        !ft_strchr(" \n", info->array_spaces[y + 1][x]) ||
-        !ft_strchr(" \n", info->array_spaces[y][x + 1]) || 
-        !ft_strchr(" \n", info->array_spaces[y][x - 1]))
+    if (x == 0)
+        return(1);
+    if (!ft_strchr("01NSWE", info->array_spaces[y -1][x])||
+        !ft_strchr("01NSWE", info->array_spaces[y + 1][x]) ||
+        !ft_strchr("01NSWE", info->array_spaces[y][x + 1]) || 
+        !ft_strchr("01NSWE", info->array_spaces[y][x - 1]))
         return(1);
     else
         return(0);
@@ -77,9 +81,9 @@ int map_check_space( t_info *info, int y, int x)
     if (y == (info->file_last_line - 1) )
         return(0);
     if (!ft_strchr(" 1\n", info->array_spaces[y -1][x])||
-    !ft_strchr(" 1\n", info->array_spaces[y + 1][x]) ||
-    !ft_strchr(" 1\n", info->array_spaces[y][x + 1]) || 
-    !ft_strchr(" 1\n", info->array_spaces[y][x - 1]))
+        !ft_strchr(" 1\n", info->array_spaces[y + 1][x]) ||
+        !ft_strchr(" 1\n", info->array_spaces[y][x + 1]) || 
+        !ft_strchr(" 1\n", info->array_spaces[y][x - 1]))
         return(1);
     else
         return(0);  
@@ -96,14 +100,14 @@ void    map_saving(int y, t_info *info)
     info->map = malloc((info->file_last_line - y) * sizeof(char *));
     while(j < (info->file_last_line - y - 1))
     {
-        info->map[j] = malloc((info->longest_line + 2) * sizeof(char));
+        info->map[j] = ft_calloc((info->longest_line + 1) , sizeof(char));
         j++;
     }
-    info->map[j] = '\0';
+    info->map[j] = NULL;
     j = 0;
     while(info->file[j + y + 1])
     {
-        while(info->array_spaces[j + y][i])
+        while(info->array_spaces[j + y + 1][i])
         {
             info->map[j][i] = info->array_spaces[j + y + 1][i];
             i++;

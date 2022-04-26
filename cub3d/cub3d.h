@@ -79,6 +79,7 @@ int 	map_check(int y, t_info *info);
 int 	map_check_0( t_info *info, int y, int x);
 int 	map_check_player(int y, int x, t_info *info);
 int 	map_check_space( t_info *info, int y, int x);
+int    map_check_aux(t_info *info, int y, int x, int error);
 //memory
 void	initialize_info(t_info *info);
 void    initialize_textures(t_info *info);
