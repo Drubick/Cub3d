@@ -10,11 +10,11 @@
 int parse(t_info *info, char**argv, char argc)
 {
     t_list *file;
-    if(argc != 2)
+    if (argc != 2)
         info->parse = 1;
      file_scan(&file, argv[1], info);
     info->parse = arry_parse(info);
-    return(info->parse);
+    return (info->parse);
 }
 
 //scans the file and saves it into a list
@@ -25,19 +25,17 @@ int file_scan(t_list **file_list, char *file, t_info *info)
     char    *buffer;
     buffer = NULL;
     *file_list = NULL;
-
     file_descriptor = open(file, O_RDONLY);
     if (file_descriptor == -1)
-        return(2);
- 
-    while(control_line != 0)
+        return (2);
+    while (control_line != 0)
     {
         control_line = get_next_line(file_descriptor, &buffer);
         ft_lstadd_back(file_list, ft_lstnew(buffer));	    
     }
     info_to_array(info, *file_list);
 
-    return(0);
+    return (0);
 }
 
 void info_to_array(t_info *info, t_list *file_list)
@@ -64,9 +62,9 @@ void    get_longest_line(t_info *info)
 
     j = 0;
     i = 0;
-    while(info->file[j])
+    while (info->file[j])
     {
-        while(info->file[j][i])
+        while (info->file[j][i])
             i++;
         if (i > info->longest_line)
             info->longest_line = i;
@@ -85,22 +83,22 @@ int    fill_with_spaces(t_info *info)
     j = 0;
     get_longest_line(info);
     info->array_spaces = malloc((info->file_last_line) * sizeof(char *));
-    while(j <= info->file_last_line)
+    while (j <= info->file_last_line)
     {
         info->array_spaces[j] = malloc((info->longest_line + 2) * sizeof(char));
         j++;
     }
     j = 0;
-    while(info->file[j])
+    while (info->file[j])
     {
-            while(info->file[j][i])
+            while (info->file[j][i])
             {
                 info->array_spaces[j][i] = info->file[j][i];
                 i++;
             }
-            while(i < (info->longest_line))
+            while (i < (info->longest_line))
             {
-                if(i < 2)
+                if (i < 2)
                     info->array_spaces[j][i] = ' ';
                 else
                 {
@@ -115,7 +113,7 @@ int    fill_with_spaces(t_info *info)
             j++;
     }
     info->array_spaces[j] = '\0';
-    return(0);
+    return (0);
 }
 
 void info_to_array_aux(t_info *info)
@@ -126,7 +124,7 @@ void info_to_array_aux(t_info *info)
 
     i = 0;
     j = 0;
-    while(info->file[j])
+    while (info->file[j])
     {
        while (info->file[j][i])
             i++;
@@ -137,4 +135,3 @@ void info_to_array_aux(t_info *info)
     }
 	info->file[j] = NULL;
 }
-
