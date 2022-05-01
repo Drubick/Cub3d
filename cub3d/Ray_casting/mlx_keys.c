@@ -2,12 +2,13 @@
 
 int		deal_keys(int key, t_info *info)
 {
+
 	mlx_clear_window(info->mlx_int, info->screen);
 	if(key == 0)
 		info->player_direction+= info->pi / 18;
 	if(key == 1)
 	{
-		void    deal_key_1(t_info *info);
+		deal_key_1(info);
 	}	
 	if(key == 2)
 		info->player_direction-= info->pi / 18;
@@ -21,6 +22,7 @@ int		deal_keys(int key, t_info *info)
 		info->player_direction= 0;
 	if(info->player_direction< 0)
 		info->player_direction= (2 * info->pi);
+		
 	drawray_3D(info);
 	return (0);
 }
@@ -28,19 +30,19 @@ int		deal_keys(int key, t_info *info)
 void    deal_key_13(t_info *info)
 {
 	if(info->map[(int)(info->player_position_y)]
-			[(int)(info->player_position_x + (cos(info->dir) / 10))] == '0')
-			info->player_position_x += (cos(info->dir) / 10);
-		if(info->map[(int)(info->player_position_y - (sin(info->dir) / 10))]
+			[(int)(info->player_position_x + (cos(info->player_direction) / 10))] == '0')
+			info->player_position_x += (cos(info->player_direction) / 10);
+		if(info->map[(int)(info->player_position_y - (sin(info->player_direction) / 10))]
 			[(int)(info->player_position_x)] == '0')
-			info->player_position_y -= (sin(info->dir) / 10);
+			info->player_position_y -= (sin(info->player_direction) / 10);
 }
 
 void    deal_key_1(t_info *info)
 {
 	if(info->map[(int)(info->player_position_y)]
-		[(int)(info->player_position_x - (cos(info->dir) / 10))] == '0')
-		info->player_position_x -= (cos(info->dir) / 10);
-	if(info->map[(int)(info->player_position_y + (sin(info->dir) / 10))]
+		[(int)(info->player_position_x - (cos(info->player_direction) / 10))] == '0')
+		info->player_position_x -= (cos(info->player_direction) / 10);
+	if(info->map[(int)(info->player_position_y + (sin(info->player_direction) / 10))]
 		[(int)(info->player_position_x)] == '0')
-		info->player_position_y += (sin(info->dir) / 10);
+		info->player_position_y += (sin(info->player_direction) / 10);
 }

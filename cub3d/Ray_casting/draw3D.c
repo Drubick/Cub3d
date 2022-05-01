@@ -10,18 +10,33 @@ int	drawray_3D(t_info *info)
 	dist = 0;
 	dist2 = 0;
 	create_img(info);
-	while(nbr_ray < resolution_X)
+	canvas_c(info, info->img_data);
+	canvas_f(info, info->img_data);
+	printf(("x = %f\n"),info->player_position_x);
+	printf(("y = %f\n"),info->player_position_y);
+	while(nbr_ray < info->resolution_X)
 	{
-		info->ray_dir = info->player_direction - atan(tan((M_PI / 2) / 2.0) * (2.0 * nbr_ray / resolution_X - 1.0));
+		info->ray_dir = info->player_direction - atan(tan(((info->fov * M_PI / 180) / 2) / 2.0) * (2.0 * nbr_ray / info->resolution_X - 1.0));
 		info->ray_dir = info->ray_dir < 0 ? (M_PI * 2) + info->ray_dir : info->ray_dir;
 		info->ray_dir = info->ray_dir > (M_PI * 2) ? info->ray_dir - (M_PI * 2) : info->ray_dir;
 		if (info->ray_dir == M_PI || info->ray_dir == 0 || info->ray_dir == (M_PI * 1.5) || info->ray_dir == (M_PI / 2))
 			info->ray_dir += 0.0000001;
 		dist = vertical_coll(info);
 		dist2 = horizontal_coll(info);
+		
 		if ((dist < dist2 && dist2 > 0) || dist < 0)
-			dist = dist2;
-		draw_vertical(info, nbr_ray, dist);
+		{
+			if (dist != dist2)
+				rgb_set_horizontal(info);
+			draw_vertical(info, nbr_ray, dist2);
+		}
+		else
+		{
+			if (dist != dist2)
+				rgb_set_vertical(info);
+			draw_vertical(info, nbr_ray, dist);
+			//exit(0);
+		}
 		nbr_ray += 1;
 	}
 	mlx_put_image_to_window(info->mlx_int, info->screen, info->image, 0, 0);

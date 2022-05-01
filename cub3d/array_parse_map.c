@@ -58,9 +58,10 @@ int map_check_0( t_info *info, int y, int x)
 }
 int map_check_player(int y, int x, t_info *info)
 {
-    info->player_position_x = x;
-    info->player_position_y = y;
-    info->player_direction = info->array_spaces[y][x];
+    info->player_position_x = x + 0.1;
+    info->player_position_y = y - info->file_map_first_line + 0.1;
+    info->player_direction_char = info->array_spaces[y][x];
+    transform_direction_radian(info->player_direction_char,info);
     info->array_spaces[y][x] = '0';
 
     if (x == 0)
@@ -72,6 +73,18 @@ int map_check_player(int y, int x, t_info *info)
         return(1);
     else
         return(0);
+}
+
+void    transform_direction_radian(char direction, t_info *info)
+{
+    if (direction == 'N')
+        info->player_direction = M_PI / 2;
+    else if (direction == 'S')
+        info->player_direction = M_PI * 1.5;
+    else if (direction == 'E')
+        info->player_direction = 0;
+    else if (direction == 'W')
+        info->player_direction = M_PI;
 }
 
 int map_check_space( t_info *info, int y, int x)
@@ -111,8 +124,8 @@ void    map_saving(int y, t_info *info)
         {
             info->map[j][i] = info->array_spaces[j + y + 1][i];
             i++;
+            
         }
-        printf("%s", info->map[j]);
         i = 0;
         j++;
     }

@@ -5,19 +5,34 @@ FOLDER				= src/
 SRCS 			=  main.c\
 					parse.c\
 					array_parse.c\
-					array_parse_map.c
+					array_parse_map.c\
+					Ray_casting/calculation_aux.c\
+					Ray_casting/calculation.c\
+					Ray_casting/draw3D.c\
+					Ray_casting/file1.c\
+					Ray_casting/mlx_aux.c\
+					Ray_casting/mlx_keys.c
 
-OBJS				= ${SRCS:.c=.o}
+OBJS				= main.o\
+					parse.o\
+					array_parse.o\
+					array_parse_map.o\
+					Ray_casting/calculation_aux.o\
+					Ray_casting/calculations.o\
+					Ray_casting/draw3D.o\
+					Ray_casting/file1.o\
+					Ray_casting/mlx_aux.o\
+					Ray_casting/mlx_keys.o
 
 CC					= gcc
-CFLAGS  			= -Wall -Wextra -Werror -Ilibft -fsanitize=address -I../libft -I.
+CFLAGS  			= -Wall -Wextra -Werror -Ilibft -I../libft -I.
 
 RM					= rm -f
 
 $(NAME):	${OBJS}
 			cd libft && make
-			#$(CC) $(CFLAGS) ${OBJ} libft/libft.a 
-			$(CC) $(CFLAGS) ${OBJS} libft/libft.a 
+			#$(CC) $(CFLAGS) ${OBJ} libft/libft.a -l mlx -framework OpenGL -framework AppKit -o $(NAME)
+			$(CC) $(CFLAGS) ${OBJS} libft/libft.a -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 all:		${NAME}
 

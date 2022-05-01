@@ -1,3 +1,5 @@
+#include "cub3d.h"
+
 char		**ft_cut_map(char *map)
 {
 	char	**cut_map;	
@@ -51,24 +53,48 @@ char	*ft_strldup(const char *s, int i)
 	return (str);
 }
 
-void	*canvas(char *img_data, int R, int G, int B, int i, int j)
+void	*canvas_f(t_info *info, char *img_data)
 {
 	int x;
 	int y;
 
-	y = j;
-	while (++y < resolution_Y)
+	y = info->resolution_Y/2;
+	while (y < info->resolution_Y)
 	{
 		x = 0;
-		while (x < (resolution_X * 4))
+		while (x < (info->resolution_X * 4))
 		{
-			img_data[y * (i * 4) + x] = B;//blue
+			img_data[(y * info->resolution_X * 4) + x] = info->F_color[2];//blue
 			x++;
-			img_data[y * (i * 4) + x] = G;//green
+			img_data[(y * info->resolution_X * 4) + x] = info->F_color[1];//green
 			x++;
-			img_data[y * (i * 4) + x] = R;//red
+			img_data[(y * info->resolution_X * 4) + x] = info->F_color[0];//red
 			x = x + 2;
 		}
+		y++;
+	}
+	return(0);
+}
+
+void	*canvas_c(t_info *info, char *img_data)
+{
+	int x;
+	int y;
+
+	y = 0;
+	while (y < info->resolution_Y)
+	{
+		x = 0;
+		while (x < (info->resolution_X * 4))
+		{
+			img_data[(y * info->resolution_X * 4) + x] = info->C_color[2];//blue
+			x++;
+			img_data[(y * info->resolution_X * 4) + x] = info->C_color[1];//green
+			x++;
+			img_data[(y * info->resolution_X * 4) + x] = info->C_color[0];//red
+			x = x + 2;
+		}
+		y++;
 	}
 	return(0);
 }

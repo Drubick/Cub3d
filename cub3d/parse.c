@@ -9,6 +9,7 @@
 //error code 3 = wrong file format
 int parse(t_info *info, char**argv, char argc)
 {
+    
     t_list *file;
     if (argc != 2)
         info->parse = 1;
