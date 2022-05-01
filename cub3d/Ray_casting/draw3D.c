@@ -1,10 +1,13 @@
 #include "cub3d.h"
 
-int	drawray_3D(t_info *info)
+/*
+Cambiar tenrarios y haer que la funcion ocupe menos
+*/
+int	drawray_3d(t_info *info)
 {
 	int	nbr_ray;
-	int dist;
-	int dist2;	
+	int	dist;
+	int	dist2;	
 
 	nbr_ray = 0;
 	dist = 0;
@@ -12,18 +15,19 @@ int	drawray_3D(t_info *info)
 	create_img(info);
 	canvas_c(info, info->img_data);
 	canvas_f(info, info->img_data);
-	printf(("x = %f\n"),info->player_position_x);
-	printf(("y = %f\n"),info->player_position_y);
-	while(nbr_ray < info->resolution_X)
+	while (nbr_ray < info->resolution_X)
 	{
-		info->ray_dir = info->player_direction - atan(tan(((info->fov * M_PI / 180) / 2) / 2.0) * (2.0 * nbr_ray / info->resolution_X - 1.0));
+		info->ray_dir = info->player_direction
+			- atan(tan(((info->fov * M_PI / 180) / 2) / 2.0)
+				* (2.0 * nbr_ray / info->resolution_X - 1.0));
 		info->ray_dir = info->ray_dir < 0 ? (M_PI * 2) + info->ray_dir : info->ray_dir;
 		info->ray_dir = info->ray_dir > (M_PI * 2) ? info->ray_dir - (M_PI * 2) : info->ray_dir;
-		if (info->ray_dir == M_PI || info->ray_dir == 0 || info->ray_dir == (M_PI * 1.5) || info->ray_dir == (M_PI / 2))
+		if (info->ray_dir == M_PI || info->ray_dir == 0
+			|| info->ray_dir == (M_PI * 1.5)
+			|| info->ray_dir == (M_PI / 2))
 			info->ray_dir += 0.0000001;
 		dist = vertical_coll(info);
 		dist2 = horizontal_coll(info);
-		
 		if ((dist < dist2 && dist2 > 0) || dist < 0)
 		{
 			if (dist != dist2)
@@ -35,12 +39,11 @@ int	drawray_3D(t_info *info)
 			if (dist != dist2)
 				rgb_set_vertical(info);
 			draw_vertical(info, nbr_ray, dist);
-			//exit(0);
 		}
 		nbr_ray += 1;
 	}
 	mlx_put_image_to_window(info->mlx_int, info->screen, info->image, 0, 0);
-	return(0);
+	return (0);
 }
 
 int	draw_pixel(char *img_addr, int r, int g, int b)

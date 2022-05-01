@@ -5,7 +5,10 @@ FOLDER				= src/
 SRCS 			=  main.c\
 					parse.c\
 					array_parse.c\
+					array_parse_aux.c\
+					array_parse_aux.c\
 					array_parse_map.c\
+					array_parse_map_aux.c\
 					Ray_casting/calculation_aux.c\
 					Ray_casting/calculation.c\
 					Ray_casting/draw3D.c\
@@ -15,8 +18,11 @@ SRCS 			=  main.c\
 
 OBJS				= main.o\
 					parse.o\
+					parse_aux.o\
 					array_parse.o\
+					array_parse_aux.o\
 					array_parse_map.o\
+					array_parse_map_aux.o\
 					Ray_casting/calculation_aux.o\
 					Ray_casting/calculations.o\
 					Ray_casting/draw3D.o\

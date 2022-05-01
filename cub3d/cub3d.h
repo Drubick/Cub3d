@@ -69,6 +69,7 @@ void	info_to_array_aux(t_info *info);
 int     fill_with_spaces(t_info *info);
 void    get_longest_line(t_info *info);
 void    map_saving(int y, t_info *info);
+void	fill_with_spaces_aux(t_info *info, int *i, int *j);
 //checks if the file is good
 int 	arry_parse(t_info *info);
 //checks textures
@@ -102,7 +103,7 @@ int		deal_key_release(int key, t_info *info);
 int		deal_keys(int key, t_info *info);
 char	**ft_cut_map(char *map);
 char	*ft_strldup(const char *s, int i);
-int		drawray_3D(t_info *info);
+int		drawray_3d(t_info *info);
 int		calc_dist(double ray_x, double ray_y, t_info *info);
 int		draw_vertical(t_info *info, int x, int dist);
 int		create_img(t_info *info);
@@ -113,4 +114,6 @@ int 	vertical_coll(t_info *info);
 int 	horizontal_coll(t_info *info);
 void    deal_key_13(t_info *info);
 void    deal_key_1(t_info *info);
+void	horizontal_coll_aux(t_info *info, double *ray_x, double *ray_y);
+void	vertical_coll_aux(t_info *info, double *ray_x, double *ray_y);
 #endif
