@@ -19,9 +19,9 @@ int	arry_parse(t_info *info)
 		y++;
 	}
 	if (map_check(y, info) == 0)
-	{
 		map_saving(y, info);
-	}
+	else
+		return (1);
 	return (0);
 }
 
@@ -58,6 +58,7 @@ int	texture_n(char *texture, t_info *info)
 		info->N_texture_path[x - 3] = texture[x];
 		x++;
 	}
+	info->N_texture_path[x-4] = '\0';
 	return (0);
 }
 
@@ -74,5 +75,6 @@ int	texture_s(char *texture, t_info *info)
 		info->S_texture_path[x - 3] = texture[x];
 		x++;
 	}
+	info->S_texture_path[x-4] = '\0';
 	return (0);
 }

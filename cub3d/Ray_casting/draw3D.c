@@ -5,6 +5,8 @@ Cambiar tenrarios y haer que la funcion ocupe menos
 */
 int	drawray_3d(t_info *info)
 {
+	mlx_clear_window(info->mlx_int, info->screen);
+	
 	int	nbr_ray;
 	int	dist;
 	int	dist2;	
@@ -20,8 +22,10 @@ int	drawray_3d(t_info *info)
 		info->ray_dir = info->player_direction
 			- atan(tan(((info->fov * M_PI / 180) / 2) / 2.0)
 				* (2.0 * nbr_ray / info->resolution_X - 1.0));
-		info->ray_dir = info->ray_dir < 0 ? (M_PI * 2) + info->ray_dir : info->ray_dir;
-		info->ray_dir = info->ray_dir > (M_PI * 2) ? info->ray_dir - (M_PI * 2) : info->ray_dir;
+		if (info->ray_dir < 0)
+			info->ray_dir = (M_PI * 2) + info->ray_dir;
+		if (info->ray_dir > (M_PI * 2))
+			info->ray_dir =  info->ray_dir - (M_PI * 2);
 		if (info->ray_dir == M_PI || info->ray_dir == 0
 			|| info->ray_dir == (M_PI * 1.5)
 			|| info->ray_dir == (M_PI / 2))

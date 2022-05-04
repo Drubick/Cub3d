@@ -7,11 +7,10 @@ SRCS 			=  main.c\
 					memory.c\
 					array_parse.c\
 					array_parse_aux.c\
-					array_parse_aux.c\
 					array_parse_map.c\
 					array_parse_map_aux.c\
 					Ray_casting/calculation_aux.c\
-					Ray_casting/calculation.c\
+					Ray_casting/Calculations.c\
 					Ray_casting/draw3D.c\
 					Ray_casting/file1.c\
 					Ray_casting/mlx_aux.c\
@@ -26,14 +25,14 @@ OBJS				= main.o\
 					array_parse_map.o\
 					array_parse_map_aux.o\
 					Ray_casting/calculation_aux.o\
-					Ray_casting/calculations.o\
+					Ray_casting/Calculations.o\
 					Ray_casting/draw3D.o\
 					Ray_casting/file1.o\
 					Ray_casting/mlx_aux.o\
 					Ray_casting/mlx_keys.o
 
 CC					= gcc
-CFLAGS  			= -Wall -Wextra -Werror -Ilibft -I../libft -I.
+CFLAGS  			= -Wall -Wextra -Werror -Ilibft -fsanitize=address -I../libft -I.
 
 RM					= rm -f
 

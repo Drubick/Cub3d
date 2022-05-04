@@ -8,24 +8,27 @@ error code 1 = wrong number of files while starting the program
 //error code 2 = file cant be oppened
 //error code 3 = wrong file format
 */
-void	valid_map_file(char const *argv)
+int	valid_map_file(char const *argv)
 {
+	
 	int	i;
 
 	i = ft_strlen(argv);
 	if (i < 5)
 		return(1);
-	if (ft_strncmp(&(argv[i - 4]), ".ber", 4))
+	if (ft_strncmp(&(argv[i - 4]), ".cub", 4))
 		return(1);
+	return(0);
 }
 
 int	parse(t_info *info, char**argv, char argc)
 {
+	
 	t_list	*file;
 
 	if (argc != 2)
 		info->parse = 1;
-	if (valid_map_file(argv))
+	if (valid_map_file(argv[1]))
 		return(1);
 	file_scan(&file, argv[1], info);
 	info->parse = arry_parse(info);

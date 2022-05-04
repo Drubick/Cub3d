@@ -5,7 +5,7 @@
 #include <math.h>
 #include <unistd.h>
 #include <stdio.h>
-//#include <mlx.h>
+#include <mlx.h>
 #include <stdio.h>
 # define PI 3.141592
 # define ESC_KEY			65307
@@ -22,6 +22,10 @@ typedef struct s_info
 	int		R;
 	int		G;
 	int		B;
+	int		key_0;
+	int		key_1;
+	int		key_2;
+	int		key_13; 
 	//mlx
 	void	*mlx_int;
 	void	*screen;
@@ -47,6 +51,7 @@ typedef struct s_info
 	char	**map;
 	char	**file;
 	char	**array_spaces;
+	int		player;
 	t_list file_aux;
 	int file_last_line;
 	int file_map_first_line;
@@ -59,8 +64,8 @@ typedef struct s_info
 	void	*images_S;
 	void	*images_W;
 	void	*images_E;
-	int F_color[4];
-	int C_color[4];
+	int		F_color[4];
+	int		C_color[4];
 }       t_info;
 
 
@@ -92,6 +97,7 @@ int 	map_check_player(int y, int x, t_info *info);
 int 	map_check_space( t_info *info, int y, int x);
 int		map_check_aux(t_info *info, int y, int x, int error);
 void    transform_direction_radian(char direction, t_info *info);
+int		valid_map_file(char const *argv);
 //memory
 void	initialize_info(t_info *info);
 void    initialize_textures(t_info *info);
@@ -127,4 +133,6 @@ void    deal_key_1(t_info *info);
 void	horizontal_coll_aux(t_info *info, double *ray_x, double *ray_y);
 void	vertical_coll_aux(t_info *info, double *ray_x, double *ray_y);
 void	listen_events(t_info *info);
+void	key_on(int key, t_info *info);
+int		key_off(int key, t_info *info);
 #endif

@@ -2,6 +2,7 @@
 
 int	map_check_player(int y, int x, t_info *info)
 {
+	info->player++;
 	info->player_position_x = x + 0.1;
 	info->player_position_y = y - info->file_map_first_line + 0.1;
 	info->player_direction_char = info->array_spaces[y][x];
