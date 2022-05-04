@@ -5,7 +5,7 @@
 #include <math.h>
 #include <unistd.h>
 #include <stdio.h>
-#include <mlx.h>
+//#include <mlx.h>
 #include <stdio.h>
 # define PI 3.141592
 # define ESC_KEY			65307
@@ -51,10 +51,14 @@ typedef struct s_info
 	int file_last_line;
 	int file_map_first_line;
 	//textures
-	char *N_texture_path;
-	char *S_texture_path;
-	char *E_texture_path;
-	char *W_texture_path;
+	char	*N_texture_path;
+	char	*S_texture_path;
+	char	*E_texture_path;
+	char	*W_texture_path;
+	void	*images_N;
+	void	*images_S;
+	void	*images_W;
+	void	*images_E;
 	int F_color[4];
 	int C_color[4];
 }       t_info;
@@ -92,6 +96,12 @@ void    transform_direction_radian(char direction, t_info *info);
 void	initialize_info(t_info *info);
 void    initialize_textures(t_info *info);
 void    initialize_ray(t_info *info);
+void	free_memory(t_info *info);
+void	free_textures(t_info *info);
+int		load_images(t_info *info);
+void	render_map(t_info *info);
+void	listen_events(t_info *info);
+int		close_window(t_info *info);
 
 //ray casting
 void	*canvas_c(t_info *info, char *img_data);
@@ -116,4 +126,5 @@ void    deal_key_13(t_info *info);
 void    deal_key_1(t_info *info);
 void	horizontal_coll_aux(t_info *info, double *ray_x, double *ray_y);
 void	vertical_coll_aux(t_info *info, double *ray_x, double *ray_y);
+void	listen_events(t_info *info);
 #endif

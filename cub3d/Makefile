@@ -4,6 +4,7 @@ FOLDER				= src/
 
 SRCS 			=  main.c\
 					parse.c\
+					memory.c\
 					array_parse.c\
 					array_parse_aux.c\
 					array_parse_aux.c\
@@ -18,6 +19,7 @@ SRCS 			=  main.c\
 
 OBJS				= main.o\
 					parse.o\
+					memory.o\
 					parse_aux.o\
 					array_parse.o\
 					array_parse_aux.o\
