@@ -34,13 +34,15 @@ int	drawray_3d(t_info *info)
 		dist2 = horizontal_coll(info);
 		if ((dist < dist2 && dist2 > 0) || dist < 0)
 		{
-			if (dist != dist2)
+			info->shortest_collision = info->ray_coll_x;
+			if(dist != dist2)
 				rgb_set_horizontal(info);
 			draw_vertical(info, nbr_ray, dist2);
 		}
 		else
 		{
-			if (dist != dist2)
+			info->shortest_collision = info->ray_coll_y;
+			if(dist != dist2)
 				rgb_set_vertical(info);
 			draw_vertical(info, nbr_ray, dist);
 		}

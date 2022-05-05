@@ -19,8 +19,8 @@ void	render_map(t_info *info)
 	info->mlx_int = mlx_init();
 	info->screen = mlx_new_window(info->mlx_int, info->resolution_X,
 			info->resolution_Y, "screen");
-	//if (!load_images(info))
-	//	error_manager(2, info);
+	if (!load_images(info))
+		error_manager(2, info);
 	listen_events(info);
 	mlx_loop_hook(info->mlx_int, drawray_3d, info);
 	mlx_loop(info->mlx_int);
@@ -36,10 +36,10 @@ void	listen_events(t_info *info)
 
 int	close_window(t_info *info)
 {
-	//mlx_destroy_image(info->mlx_int, info->E_texture_path);
-	//mlx_destroy_image(info->mlx_int, info->N_texture_path);
-	//mlx_destroy_image(info->mlx_int, info->S_texture_path);
-	//mlx_destroy_image(info->mlx_int, info->W_texture_path);
+	mlx_destroy_image(info->mlx_int, info->images_E.image);
+	mlx_destroy_image(info->mlx_int, info->images_N.image);
+	mlx_destroy_image(info->mlx_int, info->images_S.image);
+	mlx_destroy_image(info->mlx_int, info->images_W.image);
 	mlx_destroy_window(info->mlx_int, info->screen);
 	//free_memory(info);
 	exit(0);
@@ -97,10 +97,6 @@ void	initialize_info(t_info *info)
 	info->S_texture_path = NULL;
 	info->E_texture_path = NULL;
 	info->W_texture_path = NULL;
-	info->images_N = NULL;
-	info->images_S = NULL;
-	info->images_W = NULL;
-	info->images_E = NULL;
 	initialize_ray(info);
 
 }
@@ -112,6 +108,6 @@ void	initialize_ray(t_info *info)
 	info->fov = 180;
 	info->image = 0;
 	info->ray_dir = 0;
-	info->resolution_X = 1920;
-	info->resolution_Y = 1080;
+	info->resolution_X = 530;
+	info->resolution_Y = 320;
 }

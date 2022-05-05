@@ -17,7 +17,10 @@ int	vertical_coll(t_info *info)
 		&& (int)ray_y >= 0 && (int)ray_x >= 0)
 	{
 		if (info->map[(int)ray_y][(int)ray_x] == '1')
+		{
+			info->ray_coll_y = ray_y - (int)ray_y;
 			return (calc_dist(ray_x, ray_y, info));
+		}
 		vertical_coll_aux(info, &ray_x, &ray_y);
 	}
 	return (-1);
@@ -41,7 +44,10 @@ int	horizontal_coll(t_info *info)
 		&& (int)ray_x >= 0)
 	{
 		if (info->map[(int)ray_y][(int)ray_x] == '1')
+		{
+			info->ray_coll_x = ray_x - (int)ray_x;
 			return (calc_dist(ray_x, ray_y, info));
+		}
 		horizontal_coll_aux(info, &ray_x, &ray_y);
 	}
 	return (-1);
@@ -72,30 +78,18 @@ void	rgb_set_vertical(t_info *info)
 {
 	if (info->ray_dir > (M_PI / 2) && info->ray_dir < (M_PI * 1.5))
 	{
-		info->R = 252;
-		info->G = 3;
-		info->B = 3;
+		info->colision_dir = 1;
 	}
-	if (info->ray_dir < (M_PI / 2) || info->ray_dir > (M_PI * 1.5))
-	{
-		info->R = 252;
-		info->G = 252;
-		info->B = 3;
-	}
+	else
+		info->colision_dir = 3;
 }
 
 void	rgb_set_horizontal(t_info *info)
 {
 	if (info->ray_dir < M_PI && info->ray_dir > 0)
 	{
-		info->R = 36;
-		info->G = 252;
-		info->B = 3;
+		info->colision_dir = 2;
 	}
 	else
-	{
-		info->R = 3;
-		info->G = 252;
-		info->B = 236;
-	}
+		info->colision_dir = 4;
 }

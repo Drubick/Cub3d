@@ -46,7 +46,7 @@ int	map_check_aux(t_info *info, int y, int x, int error)
 		return (1);
 	
 	else if (info->array_spaces[y][x] != '\n' &&
-		y != info->file_last_line && error == 0 &&
+		y != info->file_last_line &&
 		y != info->file_map_first_line)
 	{
 		

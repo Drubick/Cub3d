@@ -31,22 +31,25 @@ void	free_textures(t_info *info)
 		free (info->W_texture_path);
 }
 
+void load_image_aux(t_image *image, char *path, void * mlx_int)
+{
+	int			bpp;
+	int			size_line;
+	int			endian;
+
+	image->image = mlx_xpm_file_to_image(mlx_int, path, &image->width, &image->height);
+	image->img_data = mlx_get_data_addr(image->image, &bpp, &size_line, &endian);
+}
+
 int	load_images(t_info *info)
 {
-	int	p;
-	int	j;
-
-	info->images_E = mlx_xpm_file_to_image(info->mlx_int,
-			info->E_texture_path, &p, &j);
-	info->images_W = mlx_xpm_file_to_image(info->mlx_int,
-			info->W_texture_path, &p, &j);
-	info->images_S = mlx_xpm_file_to_image(info->mlx_int,
-			info->S_texture_path, &p, &j);
-	info->images_N = mlx_xpm_file_to_image(info->mlx_int,
-			info->N_texture_path, &p, &j);
-	if (info->images_E && info->images_W
-		&& info->images_N
-		&& info->images_S)
+	load_image_aux(&info->images_E, info->E_texture_path, info->mlx_int);
+	load_image_aux(&info->images_W, info->W_texture_path, info->mlx_int);
+	load_image_aux(&info->images_S, info->S_texture_path, info->mlx_int);
+	load_image_aux(&info->images_N, info->N_texture_path, info->mlx_int);
+	if (info->images_E.image && info->images_W.image
+		&& info->images_N.image
+		&& info->images_S.image)
 		return (1);
 	return (0);
 }

@@ -4,9 +4,10 @@ int	map_check_0(t_info *info, int y, int x)
 {
 	if (x == 0)
 		return (1);
-	if (!ft_strchr("01NSWE", info->array_spaces[y - 1][x]) ||
-		!ft_strchr("01NSWE", info->array_spaces[y + 1][x]) ||
-		!ft_strchr("01NSWE", info->array_spaces[y][x + 1]))
+	if (!ft_strchr("01NSWE", info->array_spaces[y - 1][x]) &&
+		!ft_strchr("01NSWE", info->array_spaces[y + 1][x]) &&
+		!ft_strchr("01NSWE", info->array_spaces[y][x + 1]) &&
+		!ft_strchr("01NSWE", info->array_spaces[y][x - 1]))
 		return (1);
 	else
 		return (0);

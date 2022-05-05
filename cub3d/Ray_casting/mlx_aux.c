@@ -15,24 +15,47 @@ int	create_img(t_info *info)
 	return (1);
 }
 
+void *get_pixel_address(void *image, int x, int y, int width)
+{
+	return (image + (y * width + x) * 4);
+}
+
 int	draw_vertical(t_info *info, int x, int dist)
 {
-	int		i;
-	char	*pixel_addr;
+	int		i;;
+	char	*img_pixel_addr;
+	float	y_ratio;
 
-	pixel_addr = info->img_data + (x * 4);
-	if (dist > info->resolution_Y || dist <= 0)
-		dist = info->resolution_Y - 1;
-	i = dist;
-	pixel_addr = pixel_addr + ((((info->resolution_Y - i) / 2)
-				* ((info->resolution_X) * 4)));
-	while (i > 0)
+	i = info->resolution_Y / 2 - 1;
+
+	while (i && i > info->resolution_Y / 2 -  dist / 2)
 	{
-		draw_pixel(pixel_addr, info->R, info->G, info->B);
+		y_ratio = 0.5 + (info->resolution_Y / 2 - i) / (float)dist; 
+		img_pixel_addr = get_image_pixel_addr(info, y_ratio);
+		draw_pixel(get_pixel_address(info->img_data, x, i, info->resolution_X), img_pixel_addr[2], img_pixel_addr[1], img_pixel_addr[0]);
+		draw_pixel(get_pixel_address(info->img_data, x, info->resolution_Y - i - 1, info->resolution_X), img_pixel_addr[2], img_pixel_addr[1], img_pixel_addr[0]);
 		i--;
-		pixel_addr += (info->resolution_X * 4);
-		if (!pixel_addr)
-			break ;
 	}
+	
 	return (1);
+}
+
+char *get_image_pixel_addr(t_info *info, float y_ratio)
+{
+	t_image 	*img_pointer;
+	int			y;
+	int			x;
+
+	img_pointer = NULL;
+	if (info->colision_dir == 1)
+		img_pointer = &info->images_N;
+	else if (info->colision_dir == 2)
+		img_pointer = &info->images_W;
+	else if (info->colision_dir == 3)
+		img_pointer = &info->images_S;
+	else
+		img_pointer = &info->images_E;
+	x = img_pointer->width * info->shortest_collision;
+	y = img_pointer->height * y_ratio;
+	return(get_pixel_address(img_pointer->img_data, x - 1, y, img_pointer->width));
 }

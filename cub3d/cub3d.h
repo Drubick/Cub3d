@@ -12,6 +12,14 @@
 # define ARROW_LEFT_KEY		65361
 # define ARROW_RIGHT_KEY	65363
 
+typedef struct s_image
+{
+	int		width;
+	int		height;
+	void	*image;
+	void	*img_data;
+}	t_image;
+
 typedef struct s_info
 {
 	//ray casting
@@ -40,6 +48,9 @@ typedef struct s_info
 	int		y;
 	int		resolution_X;
 	int		resolution_Y;
+	float	ray_coll_x;
+	float	ray_coll_y;
+	float	shortest_collision;
 	//player
 	double 	player_position_x;
 	double 	player_position_y;
@@ -60,13 +71,17 @@ typedef struct s_info
 	char	*S_texture_path;
 	char	*E_texture_path;
 	char	*W_texture_path;
-	void	*images_N;
-	void	*images_S;
-	void	*images_W;
-	void	*images_E;
+	t_image	images_N;
+	t_image	images_S;
+	t_image	images_W;
+	t_image	images_E;
 	int		F_color[4];
 	int		C_color[4];
+	int		colision_dir;
+	
 }       t_info;
+
+
 
 
 //MAP FUNCTIONS
@@ -108,6 +123,7 @@ int		load_images(t_info *info);
 void	render_map(t_info *info);
 void	listen_events(t_info *info);
 int		close_window(t_info *info);
+void	load_image_aux(t_image *image, char *path, void * mlx_int);
 
 //ray casting
 void	*canvas_c(t_info *info, char *img_data);
@@ -135,4 +151,6 @@ void	vertical_coll_aux(t_info *info, double *ray_x, double *ray_y);
 void	listen_events(t_info *info);
 void	key_on(int key, t_info *info);
 int		key_off(int key, t_info *info);
+char	*get_image_pixel_addr(t_info *info, float y_ratio);
+
 #endif
