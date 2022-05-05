@@ -152,5 +152,7 @@ void	listen_events(t_info *info);
 void	key_on(int key, t_info *info);
 int		key_off(int key, t_info *info);
 char	*get_image_pixel_addr(t_info *info, float y_ratio);
+void	check_colission_zero_w(t_info *info);
+void	check_colission_zero_s(t_info *info);
 
 #endif

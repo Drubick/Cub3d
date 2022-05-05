@@ -56,7 +56,7 @@ void	map_saving(int y, t_info *info)
 	info->map = malloc((info->file_last_line - y) * sizeof(char *));
 	while (j < (info->file_last_line - y - 1))
 	{
-		info->map[j] = ft_calloc((info->longest_line + 1), sizeof(char));
+		info->map[j] = ft_calloc((info->longest_line + 2), sizeof(char));
 		j++;
 	}
 	info->map[j] = NULL;

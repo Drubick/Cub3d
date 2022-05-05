@@ -12,7 +12,7 @@ void	get_longest_line(t_info *info)
 		while (info->file[j][i])
 			i++;
 		if (i > info->longest_line)
-			info->longest_line = i;
+			info->longest_line = i + 1;
 		i = 0;
 		j++;
 	}
@@ -61,8 +61,8 @@ void	fill_with_spaces_aux(t_info *info, int *i, int *j)
 		}
 			*i += 1;
 	}
-	info->array_spaces[*j][*i - 2] = '\n';
-	info->array_spaces[*j][*i - 1] = '\0';
+	info->array_spaces[*j][*i - 1] = '\n';
+	info->array_spaces[*j][*i]  = '\0';
 }
 
 void	info_to_array_aux(t_info *info)

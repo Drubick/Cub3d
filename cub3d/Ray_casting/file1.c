@@ -29,7 +29,7 @@ void	*canvas_c(t_info *info, char *img_data)
 	int	y;
 
 	y = 0;
-	while (y < info->resolution_Y)
+	while (y < (info->resolution_Y/2))
 	{
 		x = 0;
 		while (x < (info->resolution_X * 4))

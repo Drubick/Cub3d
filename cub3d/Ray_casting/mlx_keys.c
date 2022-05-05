@@ -29,14 +29,22 @@ int	deal_keys(int key, t_info *info)
 
 void	deal_key_13(t_info *info)
 {
+
 	if (info->map[(int)(info->player_position_y)]
 			[(int)(info->player_position_x
-			+ (cos(info->player_direction) / 10))] == '0')
-			info->player_position_x += (cos(info->player_direction) / 10);
+			+ (cos(info->player_direction) / 10) )] == '0')
+	{
+		//check_colission_zero_w(info);
+		info->player_position_x += (cos(info->player_direction) / 10 + 0.0001);
+	}
 	if (info->map[(int)(info->player_position_y
 			- (sin(info->player_direction) / 10))]
 			[(int)(info->player_position_x)] == '0')
-			info->player_position_y -= (sin(info->player_direction) / 10);
+		{
+			//check_colission_zero_w(info);
+			info->player_position_y -= (sin(info->player_direction) / 10 + 0.0001);
+		}
+		
 }
 
 void	deal_key_1(t_info *info)
@@ -44,11 +52,18 @@ void	deal_key_1(t_info *info)
 	if (info->map[(int)(info->player_position_y)]
 		[(int)(info->player_position_x
 		- (cos(info->player_direction) / 10))] == '0')
+		{
 		info->player_position_x -= (cos(info->player_direction) / 10);
+		
+		}
+		
 	if (info->map[(int)(info->player_position_y
 			+ (sin(info->player_direction) / 10))]
 		[(int)(info->player_position_x)] == '0')
+		{
 		info->player_position_y += (sin(info->player_direction) / 10);
+		}
+		check_colission_zero_s(info);
 }
 
 int		key_off(int key, t_info *info)

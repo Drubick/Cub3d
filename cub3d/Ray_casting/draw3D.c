@@ -14,7 +14,7 @@ int	drawray_3d(t_info *info)
 	nbr_ray = 0;
 	dist = 0;
 	dist2 = 0;
-	create_img(info);
+	
 	canvas_c(info, info->img_data);
 	canvas_f(info, info->img_data);
 	while (nbr_ray < info->resolution_X)

@@ -21,6 +21,7 @@ void	render_map(t_info *info)
 			info->resolution_Y, "screen");
 	if (!load_images(info))
 		error_manager(2, info);
+	create_img(info);
 	listen_events(info);
 	mlx_loop_hook(info->mlx_int, drawray_3d, info);
 	mlx_loop(info->mlx_int);
@@ -108,6 +109,6 @@ void	initialize_ray(t_info *info)
 	info->fov = 180;
 	info->image = 0;
 	info->ray_dir = 0;
-	info->resolution_X = 530;
-	info->resolution_Y = 320;
+	info->resolution_X = 1920;
+	info->resolution_Y = 1080;
 }

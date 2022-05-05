@@ -28,3 +28,27 @@ void	horizontal_coll_aux(t_info *info, double *ray_x, double *ray_y)
 	else
 		*ray_x -= 1 / tan(info->ray_dir);
 }
+
+void	check_colission_zero_w(t_info *info)
+{
+	if (info->player_direction == M_PI)
+			info->player_position_x += 0.00001;
+	if (info->player_direction == 0)
+			info->player_position_x -=  0.00001;
+	if (info->player_direction == M_PI / 2)
+			info->player_position_y += 0.00001;
+	if (info->player_direction == M_PI * 1.5)
+			info->player_position_y -=  0.00001;
+}
+
+void	check_colission_zero_s(t_info *info)
+{
+	if ((info->player_position_x - (int)info->player_position_x) == 0 && (info->player_direction > M_PI / 2 && info->player_direction < M_PI * 1.5))
+			info->player_position_x -= 0.2;
+	if ((info->player_position_x - (int)info->player_position_x) == 0 && (info->player_direction < M_PI / 2 || info->player_direction > M_PI * 1.5))
+			info->player_position_x += 0.2;
+	if ((info->player_position_y - (int)info->player_position_y) == 0 && (info->player_direction > 0 && info->player_direction < M_PI))
+			info->player_position_y += 0.2;
+	if ((info->player_position_y - (int)info->player_position_y) == 0 && info->player_direction > M_PI)
+			info->player_position_y -= 0.2;
+}
