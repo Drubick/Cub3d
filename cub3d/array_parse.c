@@ -7,15 +7,33 @@ Parsea el array en busca de errores en la forma del archivo pasado
 int	arry_parse(t_info *info)
 {
 	int	y;
+	int x;
 	int	no_longer_textures;
 
+	x = 0;
 	y = 0;
 	no_longer_textures = 0;
 	while (no_longer_textures == 0 || no_longer_textures == 1)
 	{
-		no_longer_textures = texture_check_save(info->file[y], y, info);
+		no_longer_textures = texture_check_save(info->file[y], info);
 		if (no_longer_textures == 1)
 			return (1);
+		y++;
+	}
+
+	while(info->file[y])
+	{
+		while(info->file[y][x] != 1)
+		{
+			if (info->file[y][x] == '1')
+				break;
+			if (!ft_strchr(" \n", info->file[y][x]))
+				return(1);
+			x++;
+		}
+		if (info->file[y][x] == '1')
+				break;
+		x = 0;
 		y++;
 	}
 	if (map_check(y, info) == 0)
@@ -25,24 +43,26 @@ int	arry_parse(t_info *info)
 	return (0);
 }
 
-int	texture_check_save(char *texture, int y, t_info *info)
+int	texture_check_save(char *texture, t_info *info)
 {
 	int	returnal;
-	returnal = 1;
+	returnal = 0;
 
-	while (texture[y] == ' ')
-		y++;
-	if (texture[y] == 'N')
+	while (*texture == ' ')
+		texture++;
+	if (!ft_strchr(" NSWEFC\n", *texture))
+		return(1);
+	if (*texture == 'N')
 		returnal = texture_n(texture, info);
-	else if (texture[y] == 'S')
+	else if (*texture == 'S')
 		returnal = texture_s(texture, info);
-	else if (texture[y] == 'W')
+	else if (*texture == 'W')
 		returnal = texture_w(texture, info);
-	else if (texture[y] == 'E')
+	else if (*texture == 'E')
 		returnal = texture_e(texture, info);
-	else if (texture[y] == 'F')
+	else if (*texture == 'F')
 		returnal = texture_f(texture, info);
-	else if (texture[y] == 'C')
+	else if (*texture == 'C')
 		returnal = texture_c(texture, info);
 	return (returnal);
 }

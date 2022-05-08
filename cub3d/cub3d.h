@@ -103,7 +103,7 @@ void	fill_with_spaces_aux(t_info *info, int *i, int *j);
 //checks if the file is good
 int 	arry_parse(t_info *info);
 //checks textures
-int 	texture_check_save(char *texture, int y, t_info *info);
+int 	texture_check_save(char *texture, t_info *info);
 int 	texture_s(char* texture, t_info *info);
 int 	texture_n(char* texture, t_info *info);
 int 	texture_w(char* texture, t_info *info);

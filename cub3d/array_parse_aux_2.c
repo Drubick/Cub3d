@@ -37,8 +37,6 @@ int	separate_rgb(char *texture, t_info *info, int rgb)
 			i++;
 		}
 		aux[j] = '\0';
-		if (j < 0 || j > 3)
-			return (1);
 		j = 0;
 		i++;
 		if (rgb == 1)
@@ -53,5 +51,7 @@ int	separate_rgb(char *texture, t_info *info, int rgb)
 		}
         x++;
 	}
+	if (x != 3)
+		return(1);
 	return(0);
 }

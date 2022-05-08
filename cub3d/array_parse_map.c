@@ -16,12 +16,7 @@ int	map_check(int y, t_info *info)
 		{
 			error = map_check_aux(info, y, x, error);
 			if (error == 1)
-			{
-				printf("first line = %i\n", info->file_map_first_line);
-				printf("x = %i\n", x);
-				printf("y = %i\n", y);
 				return (error);
-			}
 			x++;
 		}
 		x = 0;
