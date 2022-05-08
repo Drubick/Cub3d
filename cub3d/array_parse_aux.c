@@ -27,6 +27,12 @@ int	texture_w(char *texture, t_info *info)
 		x++;
 	}
 	info->W_texture_path[x-4] = '\0';
+	info->is_w_texture++;
+	if (info->is_w_texture > 1)
+		return(1);
+	if (info->is_n_texture && info->is_s_texture && info->is_e_texture && info->is_w_texture
+		&& info->is_f_color && info->is_c_color)
+		return(2);
 	return (0);
 }
 
@@ -44,6 +50,12 @@ int	texture_e(char *texture, t_info *info)
 		x++;
 	}
 	info->E_texture_path[x-4] = '\0';
+	info->is_e_texture++;
+	if (info->is_e_texture > 1)
+		return(1);
+	if (info->is_n_texture && info->is_s_texture && info->is_e_texture && info->is_w_texture
+		&& info->is_f_color && info->is_c_color)
+		return(2);
 	return (0);
 }
 
@@ -54,16 +66,16 @@ int	texture_f(char *texture, t_info *info)
 	x = 2;
 	if (ft_strncmp("F ", texture, 2) != 0)
 		return (1);
-/*	while (texture[x])
-	{
-		info->F_color[x - 2] = texture[x];
-		x++;
-	}
-*/
-texture++;
-	texture--;
-info->y++;
-info->y--;
+	texture++;
+	texture++;
+	if(separate_rgb(texture, info, 2))
+		return (1);
+	info->is_f_color++;
+	if (info->is_f_color > 1)
+		return(1);
+	if (info->is_n_texture && info->is_s_texture && info->is_e_texture && info->is_w_texture
+		&& info->is_f_color && info->is_c_color)
+		return(2);
 	return (0);
 }
 
@@ -72,18 +84,12 @@ int	texture_c(char *texture, t_info *info)
 	int	x;
 
 	x = 2;
-	texture++;
-	texture--;
-	info->y++;
-	info->y--;
-/*
 	if (ft_strncmp("C ", texture, 2) != 0)
 		return (1);
-	while (texture[x])
-	{
-		info->C_color[x - 2] = texture[x];
-		x++;
-	}
-*/
+	texture++;
+	texture++;
+	if (separate_rgb(texture,info, 1))
+		return(1);
 	return (2);
 }
+

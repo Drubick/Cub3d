@@ -28,19 +28,21 @@ int	arry_parse(t_info *info)
 int	texture_check_save(char *texture, int y, t_info *info)
 {
 	int	returnal;
+	returnal = 1;
 
-	returnal = 0;
-	if (y == 0)
+	while (texture[y] == ' ')
+		y++;
+	if (texture[y] == 'N')
 		returnal = texture_n(texture, info);
-	else if (y == 1)
+	else if (texture[y] == 'S')
 		returnal = texture_s(texture, info);
-	else if (y == 2)
+	else if (texture[y] == 'W')
 		returnal = texture_w(texture, info);
-	else if (y == 3)
+	else if (texture[y] == 'E')
 		returnal = texture_e(texture, info);
-	else if (y == 5)
+	else if (texture[y] == 'F')
 		returnal = texture_f(texture, info);
-	else if (y == 6)
+	else if (texture[y] == 'C')
 		returnal = texture_c(texture, info);
 	return (returnal);
 }
@@ -59,6 +61,12 @@ int	texture_n(char *texture, t_info *info)
 		x++;
 	}
 	info->N_texture_path[x-4] = '\0';
+	info->is_n_texture++;
+	if (info->is_n_texture > 1)
+		return(1);
+	if (info->is_n_texture && info->is_s_texture && info->is_e_texture && info->is_w_texture
+		&& info->is_f_color && info->is_c_color)
+		return(2);
 	return (0);
 }
 
@@ -76,5 +84,11 @@ int	texture_s(char *texture, t_info *info)
 		x++;
 	}
 	info->S_texture_path[x-4] = '\0';
+	info->is_s_texture++;
+	if (info->is_s_texture > 1)
+		return(1);
+	if (info->is_n_texture && info->is_s_texture && info->is_e_texture && info->is_w_texture
+		&& info->is_f_color && info->is_c_color)
+		return(2);
 	return (0);
 }

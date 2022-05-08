@@ -62,16 +62,7 @@ int	main(int argc, char **argv)
 	initialize_info(&info);
 	if ((parse(&info, argv, argc)) != 0)
 		error_manager(1, &info);
-	
-		
-	info.F_color[0] = 220;
-	info.F_color[1] = 100;
-	info.F_color[2] = 0;
-	info.F_color[3] = '\0';
-	info.C_color[0] = 0;
-	info.C_color[1] = 30;
-	info.C_color[2] = 225;
-	info.C_color[3] = '\0';
+
 	render_map(&info);
 //	info.mlx_int = mlx_init();
 //	info.screen = mlx_new_window(info.mlx_int, info.resolution_X,

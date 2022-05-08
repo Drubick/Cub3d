@@ -67,6 +67,12 @@ typedef struct s_info
 	int file_last_line;
 	int file_map_first_line;
 	//textures
+	int		is_n_texture;
+	int		is_s_texture;
+	int		is_e_texture;
+	int		is_w_texture;
+	int		is_f_color;
+	int		is_c_color;
 	char	*N_texture_path;
 	char	*S_texture_path;
 	char	*E_texture_path;
@@ -124,6 +130,7 @@ void	render_map(t_info *info);
 void	listen_events(t_info *info);
 int		close_window(t_info *info);
 void	load_image_aux(t_image *image, char *path, void * mlx_int);
+int		separate_rgb(char *texture, t_info *info, int rgb);
 
 //ray casting
 void	*canvas_c(t_info *info, char *img_data);
