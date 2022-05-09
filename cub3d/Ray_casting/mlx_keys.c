@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int	deal_keys(int key, t_info *info)
+int	deal_keys(int key, t_info *info, t_list *file)
 {
 	key_on(key, info);
 	if (key == 0)
@@ -18,12 +18,11 @@ int	deal_keys(int key, t_info *info)
 		deal_key_13(info);
 	}	
 	if (key == 53)
-		close_window(info);
+		close_window(info, file);
 	if (info->player_direction > (2 * info->pi))
 		info->player_direction = 0;
 	if (info->player_direction < 0)
 		info->player_direction = (2 * info->pi);
-	//drawray_3d(info);
 	return (0);
 }
 
@@ -32,18 +31,12 @@ void	deal_key_13(t_info *info)
 
 	if (info->map[(int)(info->player_position_y)]
 			[(int)(info->player_position_x
-			+ (cos(info->player_direction) / 10) )] == '0')
-	{
-		//check_colission_zero_w(info);
-		info->player_position_x += (cos(info->player_direction) / 10 + 0.0001);
-	}
+			+ (cos(info->player_direction) * 0.13) )] == '0')
+				info->player_position_x += (cos(info->player_direction) * 0.13);
 	if (info->map[(int)(info->player_position_y
-			- (sin(info->player_direction) / 10))]
+			- (sin(info->player_direction) * 0.3))]
 			[(int)(info->player_position_x)] == '0')
-		{
-			//check_colission_zero_w(info);
-			info->player_position_y -= (sin(info->player_direction) / 10 + 0.0001);
-		}
+				info->player_position_y -= (sin(info->player_direction) * 0.13);
 		
 }
 
@@ -51,18 +44,13 @@ void	deal_key_1(t_info *info)
 {
 	if (info->map[(int)(info->player_position_y)]
 		[(int)(info->player_position_x
-		- (cos(info->player_direction) / 10))] == '0')
-		{
-		info->player_position_x -= (cos(info->player_direction) / 10);
-		
-		}
+		- (cos(info->player_direction) * 0.13))] == '0')
+			info->player_position_x -= (cos(info->player_direction) * 0.13);
 		
 	if (info->map[(int)(info->player_position_y
-			+ (sin(info->player_direction) / 10))]
+			+ (sin(info->player_direction) * 0.13))]
 		[(int)(info->player_position_x)] == '0')
-		{
-		info->player_position_y += (sin(info->player_direction) / 10);
-		}
+		info->player_position_y += (sin(info->player_direction) * 0.13);
 		check_colission_zero_s(info);
 }
 

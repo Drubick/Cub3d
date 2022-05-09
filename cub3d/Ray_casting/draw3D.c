@@ -30,8 +30,13 @@ int	drawray_3d(t_info *info)
 			|| info->ray_dir == (M_PI * 1.5)
 			|| info->ray_dir == (M_PI / 2))
 			info->ray_dir += 0.0000001;
+			printf("last line %i\n", info->file_last_line);
+			printf(" longest line %i\n", info->longest_line);
+			printf(" first line %i\n", info->file_map_first_line);
 		dist = vertical_coll(info);
 		dist2 = horizontal_coll(info);
+	write(1, "adios\n", 6);
+
 		if ((dist < dist2 && dist2 > 0) || dist < 0)
 		{
 			info->shortest_collision = info->ray_coll_x;

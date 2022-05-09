@@ -1,21 +1,20 @@
 #include "cub3d.h"
 
-void	free_memory(t_info *info)
+void	free_memory(t_info *info, t_list *file)
 {
+	(void)file;
 	if (info->mlx_int)
 		free (info->mlx_int);
-	if (info->screen)
-		free (info->screen);
 	if (info->image)
 		free (info->image);
 	if (info->img_data)
 		free (info->img_data);
 	if (info->map)
-		free (info->map);
+		free_matrix(info->map);
 	if (info->file)
-		free (info->file);
+		free_matrix(info->file);
 	if (info->array_spaces)
-		free (info->array_spaces);
+		free_matrix(info->array_spaces);
 	free_textures(info);
 }
 
@@ -52,4 +51,17 @@ int	load_images(t_info *info)
 		&& info->images_S.image)
 		return (1);
 	return (0);
+}
+
+void	free_matrix(char **matrix)
+{
+	int y;
+
+	y = 0;
+	while(matrix[y])
+	{
+		free (matrix[y]);
+		y++;
+	}
+	free (matrix);
 }

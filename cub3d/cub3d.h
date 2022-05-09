@@ -63,9 +63,9 @@ typedef struct s_info
 	char	**file;
 	char	**array_spaces;
 	int		player;
-	t_list file_aux;
-	int file_last_line;
-	int file_map_first_line;
+	t_list	file_aux;
+	int 	file_last_line;
+	int 	file_map_first_line;
 	//textures
 	int		is_n_texture;
 	int		is_s_texture;
@@ -92,8 +92,8 @@ typedef struct s_info
 
 //MAP FUNCTIONS
 int 	map_scan(t_info *info);
-int 	parse(t_info *info, char**argv, char argc);
-int 	file_scan(t_list **file_list, char *file, t_info *info);
+int 	parse(t_info *info, char**argv, char argc,  t_list *file);
+int 	file_scan(t_list *file_list, char *file, t_info *info);
 void 	info_to_array(t_info *info, t_list *file_list);
 void	info_to_array_aux(t_info *info);
 int     fill_with_spaces(t_info *info);
@@ -123,12 +123,12 @@ int		valid_map_file(char const *argv);
 void	initialize_info(t_info *info);
 void    initialize_textures(t_info *info);
 void    initialize_ray(t_info *info);
-void	free_memory(t_info *info);
+void	free_memory(t_info *info, t_list *fie);
 void	free_textures(t_info *info);
 int		load_images(t_info *info);
-void	render_map(t_info *info);
+void	render_map(t_info *info, t_list *file);
 void	listen_events(t_info *info);
-int		close_window(t_info *info);
+int		close_window(t_info *info, t_list *file);
 void	load_image_aux(t_image *image, char *path, void * mlx_int);
 int		separate_rgb(char *texture, t_info *info, int rgb);
 
@@ -139,7 +139,7 @@ void	*wall(char *img_data, int R, int G, int B, int i, int j);
 void	draw_wall(double nbr_ray, double dist, t_info *info);
 int		deal_key_press(int key, t_info *info);
 int		deal_key_release(int key, t_info *info);
-int		deal_keys(int key, t_info *info);
+int		deal_keys(int key, t_info *info, t_list *file);
 char	**ft_cut_map(char *map);
 char	*ft_strldup(const char *s, int i);
 int		drawray_3d(t_info *info);
@@ -161,5 +161,5 @@ int		key_off(int key, t_info *info);
 char	*get_image_pixel_addr(t_info *info, float y_ratio);
 void	check_colission_zero_w(t_info *info);
 void	check_colission_zero_s(t_info *info);
-
+void	free_matrix(char **matrix);
 #endif

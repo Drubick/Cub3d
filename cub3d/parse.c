@@ -21,16 +21,14 @@ int	valid_map_file(char const *argv)
 	return(0);
 }
 
-int	parse(t_info *info, char**argv, char argc)
+int	parse(t_info *info, char**argv, char argc, t_list *file)
 {
-	
-	t_list	*file;
 
 	if (argc != 2)
 		info->parse = 1;
 	if (valid_map_file(argv[1]))
 		return(1);
-	file_scan(&file, argv[1], info);
+	file_scan(file, argv[1], info);
 	info->parse = arry_parse(info);
 	return (info->parse);
 }
@@ -38,14 +36,14 @@ int	parse(t_info *info, char**argv, char argc)
 //scans the file and saves it into a list
 */
 
-int	file_scan(t_list **file_list, char *file, t_info *info)
+int	file_scan(t_list *file_list, char *file, t_info *info)
 {
 	int		file_descriptor;
 	int		control_line;
 	char	*buffer;
 
 	buffer = NULL;
-	*file_list = NULL;
+	file_list = NULL;
 	control_line = 12;
 	file_descriptor = open(file, O_RDONLY);
 	if (file_descriptor == -1)
@@ -53,17 +51,22 @@ int	file_scan(t_list **file_list, char *file, t_info *info)
 	while (control_line != 0)
 	{
 		control_line = get_next_line(file_descriptor, &buffer);
-		ft_lstadd_back(file_list, ft_lstnew(buffer));
+		ft_lstadd_back(&file_list, ft_lstnew(buffer));
+	
 	}
-	info_to_array(info, *file_list);
+	info_to_array(info, file_list);
 	return (0);
+
+	
 }
 
 void	info_to_array(t_info *info, t_list *file_list)
 {
 	int	j;
 	int	i;
+	t_list *aux;
 
+	aux = file_list;
 	j = 0;
 	info->file = ft_calloc(ft_lstsize(file_list) + 1, sizeof(char *));
 	while (file_list)
@@ -80,5 +83,8 @@ void	info_to_array(t_info *info, t_list *file_list)
 		file_list = file_list->next;
 		j++;
 	}
+	file_list = aux;
+
+	ft_lstclear(&file_list, free);
 	fill_with_spaces(info);
 }

@@ -54,21 +54,24 @@ void	map_saving(int y, t_info *info)
 	i = 0;
 	j = 0;
 	info->map = malloc((info->file_last_line - y) * sizeof(char *));
-	while (j < (info->file_last_line - y - 1))
+	while (j < (info->file_last_line - y))
 	{
-		info->map[j] = ft_calloc((info->longest_line + 2), sizeof(char));
+		info->map[j] = ft_calloc((info->longest_line + 3), sizeof(char));
 		j++;
 	}
 	info->map[j] = NULL;
 	j = 0;
-	while (info->file[j + y + 1])
+	printf("la y vale %i\n", y);
+	while (info->file[j + y])
 	{
-		while (info->array_spaces[j + y + 1][i])
+		while (info->array_spaces[j + y][i])
 		{
-			info->map[j][i] = info->array_spaces[j + y + 1][i];
+			info->map[j][i] = info->array_spaces[j + y][i];
 			i++;
 		}
+		printf("%s", info->map[j]);
 		i = 0;
 		j++;
 	}
+
 }

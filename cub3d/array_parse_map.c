@@ -6,17 +6,24 @@ int	map_check(int y, t_info *info)
 	int	x;
 	int	error;
 
+	y -=1;
 	x = 0;
 	error = 0;
-	y += 1;
 	info->file_map_first_line = y;
+	printf("last line = %i\n",info->file_last_line);
 	while (info->array_spaces[y] && y <= info->file_last_line)
 	{
+		printf( "y = %i\n", y);
 		while (info->array_spaces[y][x])
 		{
 			error = map_check_aux(info, y, x, error);
 			if (error == 1)
+			{
+				printf("%c\n", info->array_spaces[y][x]);
+				printf("y = %i\n", y);
+				printf("x ==%i\n", x);
 				return (error);
+			}
 			x++;
 		}
 		x = 0;
@@ -29,12 +36,17 @@ int	map_check(int y, t_info *info)
 
 int	map_check_aux(t_info *info, int y, int x, int error)
 {
+	printf("x1 = %i \n", x);
 	if (y == info->file_last_line || y == info->file_map_first_line)
 	{
+	
 		if (info->array_spaces[y][x] != '1' &&
 			info->array_spaces[y][x] != ' ' &&
 			info->array_spaces[y][x] != '\n')
+			{
+				printf("lol\n");
 			return (1);
+			}
 	}
 	
 	if (!ft_strchr(" SE10WN\n", info->array_spaces[y][x]))

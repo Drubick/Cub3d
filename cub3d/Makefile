@@ -34,7 +34,7 @@ OBJS				= main.o\
 					array_parse_aux_2.o
 
 CC					= gcc
-CFLAGS  			= -Wall -Wextra -Werror -Ilibft -I../libft -I.
+CFLAGS  			= -Wall -Wextra -Werror -Ilibft  -I../libft -I.
 
 RM					= rm -f
 

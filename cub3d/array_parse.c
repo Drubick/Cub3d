@@ -23,7 +23,9 @@ int	arry_parse(t_info *info)
 
 	while(info->file[y])
 	{
-		while(info->file[y][x] != 1)
+		if (info->file[y][x] == '1')
+				break;
+		while(info->file[y][x] != 1 && info->file[y][x])
 		{
 			if (info->file[y][x] == '1')
 				break;
@@ -40,6 +42,7 @@ int	arry_parse(t_info *info)
 		map_saving(y, info);
 	else
 		return (1);
+	
 	return (0);
 }
 

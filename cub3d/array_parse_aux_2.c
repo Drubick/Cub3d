@@ -30,24 +30,28 @@ int	separate_rgb(char *texture, t_info *info, int rgb)
     x = 0;
 	while (texture[i] && x <= 2)
 	{
-		while (texture[i] != ',' && texture[i] && texture[i != ' '])
+		while (texture[i] != ',' && texture[i] && texture[i] != ' ' && texture[i] != '\n'
+				&& texture[i])
 		{
 			aux[j] = texture[i];
 			j++;
 			i++;
 		}
-		aux[j] = '\0';
+		if (j < 3)
+			aux[j] = '\0';
 		j = 0;
 		i++;
 		if (rgb == 1)
 		{
 			if (save_rgb_c(info, aux, x))
 				return (1);
+				info->C_color[3] = 0;
 		}
 		else
 		{
 			if (save_rgb_f(info, aux, x))
 				return (1);
+			info->F_color[3] = 0;
 		}
         x++;
 	}

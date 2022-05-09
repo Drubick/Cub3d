@@ -1,15 +1,15 @@
 
 #include "cub3d.h"
 
-void	error_manager(int conditional, t_info *info)
+void	error_manager(int conditional, t_info *info, t_list *file)
 {
 	if (conditional)
 		printf("Invalid map format\n");
-	free_memory(info);
+	free_memory(info, file);
 	exit (1);
 }
 
-void	render_map(t_info *info)
+void	render_map(t_info *info, t_list *file)
 {
 	int	screen_w;
 	int	screen_h;
@@ -20,59 +20,58 @@ void	render_map(t_info *info)
 	info->screen = mlx_new_window(info->mlx_int, info->resolution_X,
 			info->resolution_Y, "screen");
 	if (!load_images(info))
-		error_manager(2, info);
+		error_manager(2, info, file);
 	create_img(info);
+	
 	listen_events(info);
+	
 	mlx_loop_hook(info->mlx_int, drawray_3d, info);
 	mlx_loop(info->mlx_int);
+	
 }
 
 void	listen_events(t_info *info)
 {
 	mlx_hook(info->screen, 2, 1L << 0, deal_keys, info);
 	mlx_hook(info->screen, 3, 1L << 1, key_off, info);
-	//mlx_key_hook(info->screen, *deal_keys, info);
 	mlx_hook(info->screen, 17, (1L << 8), close_window, info);
 }
 
-int	close_window(t_info *info)
+int	close_window(t_info *info, t_list *file)
 {
 	mlx_destroy_image(info->mlx_int, info->images_E.image);
 	mlx_destroy_image(info->mlx_int, info->images_N.image);
 	mlx_destroy_image(info->mlx_int, info->images_S.image);
 	mlx_destroy_image(info->mlx_int, info->images_W.image);
 	mlx_destroy_window(info->mlx_int, info->screen);
-	//free_memory(info);
+	free_memory(info, file);
 	exit(0);
 	return (0);
 }
 
+void	leaks()
+{
+	system("leaks cub_3d");
+}
 
 int	main(int argc, char **argv)
 {
+	atexit(leaks);
 	t_info	info;
+	t_list	file;
 	int		returnal;
 
 	returnal = 0;
+	file.content = NULL;
 	if (argc != 2)
 	{
 		printf("Invalid amount of arguments\n");
 		return (1);
 	}
 	initialize_info(&info);
-	if ((parse(&info, argv, argc)) != 0)
-		error_manager(1, &info);
-
-	render_map(&info);
-//	info.mlx_int = mlx_init();
-//	info.screen = mlx_new_window(info.mlx_int, info.resolution_X,
-		//	info.resolution_Y, "screen");
-	
-	
-/*	
-	mlx_hook(info.screen, 2, 1L << 0, deal_keys, &info);
-	mlx_loop(info.mlx_int);
-*/
+	if ((parse(&info, argv, argc, &file)) != 0)
+		error_manager(1, &info, &file);
+	render_map(&info, &file);
 }
 
 void	initialize_info(t_info *info)
