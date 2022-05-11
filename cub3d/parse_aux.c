@@ -40,6 +40,7 @@ int	fill_with_spaces(t_info *info)
 		i = 0;
 		j++;
 	}
+	free(info->array_spaces[j]);
 	info->array_spaces[j] = NULL;
 	return (0);
 }

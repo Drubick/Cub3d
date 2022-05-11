@@ -67,7 +67,9 @@ int	texture_check_save(char *texture, t_info *info)
 		returnal = texture_f(texture, info);
 	else if (*texture == 'C')
 		returnal = texture_c(texture, info);
+
 	return (returnal);
+	
 }
 
 int	texture_n(char *texture, t_info *info)

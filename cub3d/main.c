@@ -1,13 +1,20 @@
 
 #include "cub3d.h"
 
+void	leaks()
+{
+	system("leaks cub_3d");
+}
 void	error_manager(int conditional, t_info *info, t_list *file)
 {
-	if (conditional)
+	if (conditional == 1)
 		printf("Invalid map format\n");
+	else if(conditional == 2)
+		printf("Invalid textures\n");
 	free_memory(info, file);
 	exit (1);
 }
+
 
 void	render_map(t_info *info, t_list *file)
 {
@@ -19,7 +26,7 @@ void	render_map(t_info *info, t_list *file)
 	info->mlx_int = mlx_init();
 	info->screen = mlx_new_window(info->mlx_int, info->resolution_X,
 			info->resolution_Y, "screen");
-	if (!load_images(info))
+	if (load_images(info))
 		error_manager(2, info, file);
 	create_img(info);
 	
@@ -45,22 +52,19 @@ int	close_window(t_info *info, t_list *file)
 	mlx_destroy_image(info->mlx_int, info->images_W.image);
 	mlx_destroy_window(info->mlx_int, info->screen);
 	free_memory(info, file);
+	(void)file;
 	exit(0);
 	return (0);
 }
 
-void	leaks()
-{
-	system("leaks cub_3d");
-}
+
 
 int	main(int argc, char **argv)
 {
-	atexit(leaks);
+	//atexit(leaks);
 	t_info	info;
 	t_list	file;
 	int		returnal;
-
 	returnal = 0;
 	file.content = NULL;
 	if (argc != 2)

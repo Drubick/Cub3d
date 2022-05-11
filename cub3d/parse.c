@@ -28,8 +28,12 @@ int	parse(t_info *info, char**argv, char argc, t_list *file)
 		info->parse = 1;
 	if (valid_map_file(argv[1]))
 		return(1);
-	file_scan(file, argv[1], info);
+	if (file_scan(file, argv[1], info))
+		return(1);
+		
 	info->parse = arry_parse(info);
+	
+	
 	return (info->parse);
 }
 /*
@@ -54,7 +58,10 @@ int	file_scan(t_list *file_list, char *file, t_info *info)
 		ft_lstadd_back(&file_list, ft_lstnew(buffer));
 	
 	}
+	
+	close(file_descriptor);
 	info_to_array(info, file_list);
+
 	return (0);
 
 	
@@ -84,6 +91,7 @@ void	info_to_array(t_info *info, t_list *file_list)
 		j++;
 	}
 	file_list = aux;
+	
 
 	ft_lstclear(&file_list, free);
 	fill_with_spaces(info);

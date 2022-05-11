@@ -1,5 +1,5 @@
 #include "cub3d.h"
-
+#include <fcntl.h>
 void	free_memory(t_info *info, t_list *file)
 {
 	(void)file;
@@ -10,11 +10,12 @@ void	free_memory(t_info *info, t_list *file)
 	if (info->img_data)
 		free (info->img_data);
 	if (info->map)
-		free_matrix(info->map);
+		free_map(info);
 	if (info->file)
-		free_matrix(info->file);
+		free_file(info);
 	if (info->array_spaces)
-		free_matrix(info->array_spaces);
+		free_array_spaces(info);
+
 	free_textures(info);
 }
 
@@ -30,38 +31,73 @@ void	free_textures(t_info *info)
 		free (info->W_texture_path);
 }
 
-void load_image_aux(t_image *image, char *path, void * mlx_int)
+
+int load_image_aux(t_image *image, char *path, void * mlx_int)
 {
 	int			bpp;
 	int			size_line;
 	int			endian;
 
 	image->image = mlx_xpm_file_to_image(mlx_int, path, &image->width, &image->height);
+	if (!image->image)
+		return (1);
 	image->img_data = mlx_get_data_addr(image->image, &bpp, &size_line, &endian);
+	return (0);
 }
 
 int	load_images(t_info *info)
 {
-	load_image_aux(&info->images_E, info->E_texture_path, info->mlx_int);
-	load_image_aux(&info->images_W, info->W_texture_path, info->mlx_int);
-	load_image_aux(&info->images_S, info->S_texture_path, info->mlx_int);
-	load_image_aux(&info->images_N, info->N_texture_path, info->mlx_int);
-	if (info->images_E.image && info->images_W.image
-		&& info->images_N.image
-		&& info->images_S.image)
+	if(load_image_aux(&info->images_E, info->E_texture_path, info->mlx_int)
+		|| load_image_aux(&info->images_W, info->W_texture_path, info->mlx_int)
+		|| load_image_aux(&info->images_S, info->S_texture_path, info->mlx_int)
+		|| load_image_aux(&info->images_N, info->N_texture_path, info->mlx_int))
+		return(1);
+	if (!info->images_E.image && !info->images_W.image
+		&& !info->images_N.image
+		&& !info->images_S.image)
 		return (1);
 	return (0);
 }
 
-void	free_matrix(char **matrix)
+void	free_file(t_info *info)
 {
-	int y;
+	int	i;
 
-	y = 0;
-	while(matrix[y])
+	i = 0;
+	while (info->file[i])
 	{
-		free (matrix[y]);
-		y++;
+		free(info->file[i]);
+		i++;
 	}
-	free (matrix);
+	free(info->file[i]);
+	free(info->file);
 }
+
+void	free_map(t_info *info)
+{
+	int	i;
+
+	i = 0;
+	while (info->map[i])
+	{
+		free(info->map[i]);
+		i++;
+	}
+	free(info->map[i]);
+	free(info->map);
+}
+
+void	free_array_spaces(t_info *info)
+{
+	int	i;
+
+	i = 0;
+	while (info->array_spaces[i])
+	{
+		free(info->array_spaces[i]);
+		i++;
+	}
+	free(info->array_spaces[i]);
+	free(info->array_spaces);
+}
+

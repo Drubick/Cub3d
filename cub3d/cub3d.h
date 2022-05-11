@@ -129,8 +129,11 @@ int		load_images(t_info *info);
 void	render_map(t_info *info, t_list *file);
 void	listen_events(t_info *info);
 int		close_window(t_info *info, t_list *file);
-void	load_image_aux(t_image *image, char *path, void * mlx_int);
+int		load_image_aux(t_image *image, char *path, void * mlx_int);
 int		separate_rgb(char *texture, t_info *info, int rgb);
+void	free_array_spaces(t_info *info);
+void	free_map(t_info *info);
+void	free_file(t_info *info);
 
 //ray casting
 void	*canvas_c(t_info *info, char *img_data);
@@ -162,4 +165,5 @@ char	*get_image_pixel_addr(t_info *info, float y_ratio);
 void	check_colission_zero_w(t_info *info);
 void	check_colission_zero_s(t_info *info);
 void	free_matrix(char **matrix);
+void	leaks();
 #endif

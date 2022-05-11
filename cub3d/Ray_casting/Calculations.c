@@ -12,7 +12,7 @@ int	vertical_coll(t_info *info)
 	else
 		ray_x = (int)(ray_x) - 0.00000000001;
 	ray_y += (info->player_position_x - ray_x) * tan(info->ray_dir);
-	while ((int)ray_y <= (info->file_last_line - info->file_map_first_line -2)
+	while ((int)ray_y <= (info->file_last_line - info->file_map_first_line - 1)
 		&& (int)ray_x <= info->longest_line - 1
 		&& (int)ray_y >= 0 && (int)ray_x >= 0)
 	{
@@ -39,7 +39,7 @@ int	horizontal_coll(t_info *info)
 		ray_y = (int)ray_y + 1;
 	ray_x += (info->player_position_y - ray_y)
 		/ (tan(info->ray_dir) + 0.00000000001);
-	while ((int)ray_y <= (info->file_last_line - info->file_map_first_line -2)
+	while ((int)ray_y <= (info->file_last_line - info->file_map_first_line - 1)
 		&& (int)ray_x <= info->longest_line - 1  && (int)ray_y >= 0
 		&& (int)ray_x >= 0)
 	{
