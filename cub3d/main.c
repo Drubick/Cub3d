@@ -28,11 +28,13 @@ void	render_map(t_info *info, t_list *file)
 			info->resolution_Y, "screen");
 	if (load_images(info))
 		error_manager(2, info, file);
+	
 	create_img(info);
 	
 	listen_events(info);
 	
 	mlx_loop_hook(info->mlx_int, drawray_3d, info);
+	
 	mlx_loop(info->mlx_int);
 	
 }
@@ -61,7 +63,7 @@ int	close_window(t_info *info, t_list *file)
 
 int	main(int argc, char **argv)
 {
-	//atexit(leaks);
+	atexit(leaks);
 	t_info	info;
 	t_list	file;
 	int		returnal;

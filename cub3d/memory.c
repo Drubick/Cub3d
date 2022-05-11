@@ -5,8 +5,6 @@ void	free_memory(t_info *info, t_list *file)
 	(void)file;
 	if (info->mlx_int)
 		free (info->mlx_int);
-	if (info->image)
-		free (info->image);
 	if (info->img_data)
 		free (info->img_data);
 	if (info->map)
@@ -17,6 +15,7 @@ void	free_memory(t_info *info, t_list *file)
 		free_array_spaces(info);
 
 	free_textures(info);
+	
 }
 
 void	free_textures(t_info *info)

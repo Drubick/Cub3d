@@ -34,7 +34,7 @@ OBJS				= main.o\
 					array_parse_aux_2.o
 
 CC					= gcc
-CFLAGS  			= -Wall -Wextra -Werror -Ilibft -fsanitize=address -I../libft -I.
+CFLAGS  			= -Wall -Wextra -Werror -Ilibft -I../libft -I.
 
 RM					= rm -f
 
@@ -56,7 +56,7 @@ fclean:
 			${RM} $(OBJS_COMU) $(OBJS)
 			cd libft && make fclean
 			cd minilibx && make clean
-			${RM} so_long
+			${RM} ${NAME}
 			${RM} libmlx.dylib
 
 .PHONY: 	all clean fclean re

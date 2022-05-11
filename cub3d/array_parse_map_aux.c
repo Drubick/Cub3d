@@ -71,5 +71,4 @@ void	map_saving(int y, t_info *info)
 		i = 0;
 		j++;
 	}
-
 }
