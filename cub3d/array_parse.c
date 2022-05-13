@@ -49,7 +49,7 @@ int	arry_parse(t_info *info)
 	no_longer_textures = 0;
 	while (no_longer_textures == 0 || no_longer_textures == 1)
 	{
-		no_longer_textures = texture_check_save(info->file[y], info);
+		no_longer_textures = texture_check_save(info->file[y], info, y);
 		if (no_longer_textures == 1)
 			return (1);
 		y++;
@@ -63,12 +63,15 @@ int	arry_parse(t_info *info)
 	return (0);
 }
 
-int	texture_check_save(char *texture, t_info *info)
+int	texture_check_save(char *texture, t_info *info, int y)
 {
+	
 	int	returnal;
 
 	returnal = 0;
-	while (*texture == ' ')
+	if (y == info->file_last_line - 1)
+		return (1);
+	while (*texture == ' ' && *texture)
 		texture++;
 	if (!ft_strchr(" NSWEFC\n", *texture))
 		return (1);
@@ -89,12 +92,14 @@ int	texture_check_save(char *texture, t_info *info)
 
 int	texture_n(char *texture, t_info *info)
 {
-	int	x;
+	int		x;
+	char	*aux;
 
 	x = 3;
 	if (ft_strncmp("NO ", texture, 3) != 0)
 		return (1);
-	info->n_texture_path = ft_calloc((ft_strlen(texture) - 2), sizeof(char));
+	if (!info->n_texture_path)
+		info->n_texture_path = ft_calloc((ft_strlen(texture) - 2), sizeof(char));
 	while (texture[x])
 	{
 		info->n_texture_path[x - 3] = texture[x];
@@ -102,6 +107,9 @@ int	texture_n(char *texture, t_info *info)
 	}
 	info->n_texture_path[x - 4] = '\0';
 	info->is_n_texture++;
+	aux = info->n_texture_path;
+	info->n_texture_path = ft_strtrim(info->n_texture_path, " ");
+	free(aux);
 	if (info->is_n_texture > 1)
 		return (1);
 	if (info->is_n_texture && info->is_s_texture && info->is_e_texture
@@ -112,12 +120,14 @@ int	texture_n(char *texture, t_info *info)
 
 int	texture_s(char *texture, t_info *info)
 {
-	int	x;
+	int		x;
+	char	*aux;
 
 	x = 3;
 	if (ft_strncmp("SO ", texture, 3) != 0)
 		return (1);
-	info->s_texture_path = ft_calloc((ft_strlen(texture) - 2), sizeof(char));
+	if (!info->s_texture_path)
+		info->s_texture_path = ft_calloc((ft_strlen(texture) - 2), sizeof(char));
 	while (texture[x])
 	{
 		info->s_texture_path[x - 3] = texture[x];
@@ -125,6 +135,9 @@ int	texture_s(char *texture, t_info *info)
 	}
 	info->s_texture_path[x - 4] = '\0';
 	info->is_s_texture++;
+	aux = info->s_texture_path;
+	info->s_texture_path = ft_strtrim(info->s_texture_path, " ");
+	free(aux);
 	if (info->is_s_texture > 1)
 		return (1);
 	if (info->is_n_texture && info->is_s_texture && info->is_e_texture

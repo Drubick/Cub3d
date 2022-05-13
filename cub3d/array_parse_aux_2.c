@@ -6,7 +6,7 @@
 /*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:13:03 by vnastase          #+#    #+#             */
-/*   Updated: 2022/05/13 20:00:35 by vnastase         ###   ########.fr       */
+/*   Updated: 2022/05/13 20:15:46 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	save_rgb_f(t_info *info, int rgb)
 
 int	separate_rgb_aux(int rgb, int *x, t_info *info)
 {
+	if (info->j < 1)
+		return(1);
 	if (info->j < 3)
 		info->aux[info->j] = '\0';
 	if (rgb == 1)

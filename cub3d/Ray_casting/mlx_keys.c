@@ -14,13 +14,18 @@
 
 int	deal_keys(int key, t_info *info, t_list *file)
 {
+	printf("%i\n", key);
 	key_on(key, info);
 	if (key == 0)
+		deal_key_0(info);
+	if (key == 124)
+		info->player_direction -= info->pi / 18;
+	if (key == 123)
 		info->player_direction += info->pi / 18;
 	if (key == 1)
 		deal_key_1(info);
 	if (key == 2)
-		info->player_direction -= info->pi / 18;
+		deal_key_2(info);
 	if (key == 13)
 		deal_key_13(info);
 	if (key == 53)
@@ -43,6 +48,31 @@ void	deal_key_13(t_info *info)
 			[(int)(info->player_position_x)] == '0')
 				info->player_position_y -= (sin(info->player_direction) * 0.13);
 }
+
+void	deal_key_2(t_info *info)
+{
+	if (info->map[(int)(info->player_position_y)]
+			[(int)(info->player_position_x
+			+ (cos(info->player_direction - 0.5 * M_PI)  * 0.13))] == '0')
+				info->player_position_x += (cos(info->player_direction - 0.5 * M_PI) * 0.13);
+	if (info->map[(int)(info->player_position_y
+			- (sin(info->player_direction - 0.5 * M_PI) * 0.3))]
+			[(int)(info->player_position_x)] == '0')
+				info->player_position_y -= (sin(info->player_direction - 0.5 * M_PI) * 0.13);
+}
+
+void	deal_key_0(t_info *info)
+{
+	if (info->map[(int)(info->player_position_y)]
+			[(int)(info->player_position_x
+			+ (cos(info->player_direction + 0.5 * M_PI)  * 0.13))] == '0')
+				info->player_position_x += (cos(info->player_direction + 0.5 * M_PI) * 0.13);
+	if (info->map[(int)(info->player_position_y
+			- (sin(info->player_direction + 0.5 * M_PI) * 0.3))]
+			[(int)(info->player_position_x)] == '0')
+				info->player_position_y -= (sin(info->player_direction + 0.5 * M_PI) * 0.13);
+}
+
 
 void	deal_key_1(t_info *info)
 {

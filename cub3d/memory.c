@@ -15,11 +15,8 @@
 
 void	free_memory(t_info *info, t_list *file)
 {
+	
 	(void)file;
-	if (info->mlx_int)
-		free (info->mlx_int);
-	if (info->img_data)
-		free (info->img_data);
 	if (info->map)
 		free_map(info);
 	if (info->file)

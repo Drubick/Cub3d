@@ -6,7 +6,7 @@
 /*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 19:03:38 by vnastase          #+#    #+#             */
-/*   Updated: 2022/05/13 19:48:46 by vnastase         ###   ########.fr       */
+/*   Updated: 2022/05/13 21:06:13 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int		arry_parse(t_info *info);
 /*
 checks textures
 */
-int		texture_check_save(char *texture, t_info *info);
+int		texture_check_save(char *texture, t_info *info, int y);
 int		texture_s(char *texture, t_info *info);
 int		texture_n(char *texture, t_info *info);
 int		texture_w(char *texture, t_info *info);
@@ -179,4 +179,7 @@ char	*get_image_pixel_addr(t_info *info, float y_ratio);
 void	check_colission_zero_w(t_info *info);
 void	check_colission_zero_s(t_info *info);
 void	free_matrix(char **matrix);
+void	leaks();
+void	deal_key_2(t_info *info);
+void	deal_key_0(t_info *info);
 #endif

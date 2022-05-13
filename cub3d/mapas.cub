@@ -1,14 +1,13 @@
-NO ./textures/wall1.xpm
-SO ./textures/wall2.xpm
+NO      ./textures/wall1.xpm     
+SO    ./textures/wall2.xpm
 
-F 165,111,22
+F 165,111,22     
 
-WE ./textures/cara.XPM
-EA ./textures/wall4.xpm
+WE      ./textures/cara.XPM
+EA       ./textures/wall4.xpm
 
 
-C 75,250,219
-
+C                75,255,219
 111111111111111111111111111
 100000000000000000000E1
 100000000111111111111111111

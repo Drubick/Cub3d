@@ -6,7 +6,7 @@
 /*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 19:13:37 by vnastase          #+#    #+#             */
-/*   Updated: 2022/05/13 19:40:04 by vnastase         ###   ########.fr       */
+/*   Updated: 2022/05/13 20:26:01 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@ int	valid_map_file(char const *argv)
 
 int	parse(t_info *info, char**argv, char argc, t_list *file)
 {
+	
 	if (argc != 2)
 		info->parse = 1;
 	if (valid_map_file(argv[1]))
 		return (1);
+		
 	if (file_scan(file, argv[1], info))
 		return (1);
 	info->parse = arry_parse(info);

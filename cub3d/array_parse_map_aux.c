@@ -6,7 +6,7 @@
 /*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:07:49 by vnastase          #+#    #+#             */
-/*   Updated: 2022/05/13 18:12:45 by vnastase         ###   ########.fr       */
+/*   Updated: 2022/05/13 20:07:47 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int	map_check_player(int y, int x, t_info *info)
 {
 	info->player++;
+	if (info->player > 1)
+		return (1);
 	info->player_position_x = x + 0.1;
 	info->player_position_y = y - info->file_map_first_line + 0.1;
 	info->player_direction_char = info->array_spaces[y][x];

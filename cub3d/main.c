@@ -6,7 +6,7 @@
 /*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 19:05:03 by vnastase          #+#    #+#             */
-/*   Updated: 2022/05/13 19:49:45 by vnastase         ###   ########.fr       */
+/*   Updated: 2022/05/13 21:41:28 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	leaks()
 void	error_manager(int conditional, t_info *info, t_list *file)
 {
 	if (conditional == 1)
-		printf("Invalid map format\n");
+		printf("Error\nInvalid map format\n");
 	else if (conditional == 2)
-		printf("Invalid textures\n");
+		printf("Error\nInvalid textures\n");
 	free_memory(info, file);
 	exit (1);
 }
@@ -38,7 +38,7 @@ int	main(int argc, char **argv)
 	file.content = NULL;
 	if (argc != 2)
 	{
-		printf("Invalid amount of arguments\n");
+		printf("Error\nInvalid amount of arguments\n");
 		return (1);
 	}
 	initialize_info(&info);
