@@ -1,5 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_aux.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/13 17:42:17 by rgirondo          #+#    #+#             */
+/*   Updated: 2022/05/13 17:42:17 by rgirondo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "cub3d.h"
 
 int	create_img(t_info *info)
 {
@@ -8,45 +19,45 @@ int	create_img(t_info *info)
 	int			endian;
 
 	mlx_clear_window(info->mlx_int, info->screen);
-	info->image = mlx_new_image(info->mlx_int, info->resolution_X,
-			info->resolution_Y);
+	info->image = mlx_new_image(info->mlx_int, info->res_X,
+			info->res_Y);
 	info->img_data = mlx_get_data_addr(info->image, &bpp, &size_line, &endian);
 	return (1);
 }
 
-void *get_pixel_address(void *image, int x, int y, int width)
+void	*px_ad(void *image, int x, int y, int width)
 {
 	return (image + (y * width + x) * 4);
 }
 
-
 int	draw_vertical(t_info *info, int x, int dist)
 {
-	int		i;;
-	char	*img_pixel_addr;
+	int		i;
+	char	*px;
+	char	*px2;
 	float	y_ratio;
 
-	i = info->resolution_Y / 2 - 1;
-
-	while (i && i > info->resolution_Y / 2 -  dist / 2)
+	px = NULL;
+	px2 = NULL;
+	y_ratio = 0;
+	i = info->res_Y / 2 - 1;
+	while (i && i > info->res_Y / 2 - dist / 2)
 	{
-
-		y_ratio = (info->resolution_Y / 2 - i) / (float)dist; 
-
-		img_pixel_addr = get_image_pixel_addr(info, -y_ratio);
-		
-		draw_pixel(get_pixel_address(info->img_data, x, i, info->resolution_X), img_pixel_addr[2], img_pixel_addr[1], img_pixel_addr[0]);
-		img_pixel_addr = get_image_pixel_addr(info, y_ratio);
-		draw_pixel(get_pixel_address(info->img_data, x, info->resolution_Y - i - 1, info->resolution_X), img_pixel_addr[2], img_pixel_addr[1], img_pixel_addr[0]);
+		y_ratio = (info->res_Y / 2 - i) / (float)dist;
+		px = get_image_pixel_addr(info, -y_ratio);
+		px2 = px_ad(info->img_data, x, i, info->res_X);
+		draw_pixel(px2, px[2], px[1], px[0]);
+		px = get_image_pixel_addr(info, y_ratio);
+		px2 = px_ad(info->img_data, x, info->res_Y - i - 1, info->res_X);
+		draw_pixel(px2, px[2], px[1], px[0]);
 		i--;
 	}
-	
 	return (1);
 }
 
-char *get_image_pixel_addr(t_info *info, float y_ratio)
+char	*get_image_pixel_addr(t_info *info, float y_ratio)
 {
-	t_image 	*img_pointer;
+	t_image		*img_pointer;
 	int			y;
 	int			x;
 
@@ -64,7 +75,5 @@ char *get_image_pixel_addr(t_info *info, float y_ratio)
 	y = img_pointer->height * y_ratio;
 	if (y < 1)
 		y = 1;
-	return(get_pixel_address(img_pointer->img_data, x - 1, y , img_pointer->width));
+	return (px_ad(img_pointer->img_data, x - 1, y, img_pointer->width));
 }
-
-
