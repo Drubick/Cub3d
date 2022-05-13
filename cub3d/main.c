@@ -1,10 +1,11 @@
 
 #include "cub3d.h"
 
-void	leaks()
-{
-	system("leaks cub_3d");
-}
+// void	leaks()
+// {
+// 	system("leaks cub_3d");
+// }
+
 void	error_manager(int conditional, t_info *info, t_list *file)
 {
 	if (conditional == 1)
@@ -21,22 +22,17 @@ void	render_map(t_info *info, t_list *file)
 	int	screen_w;
 	int	screen_h;
 
-	screen_w = info->resolution_X * 32;
-	screen_h = info->resolution_Y * 32;
+	screen_w = info->res_X * 32;
+	screen_h = info->res_Y * 32;
 	info->mlx_int = mlx_init();
-	info->screen = mlx_new_window(info->mlx_int, info->resolution_X,
-			info->resolution_Y, "screen");
+	info->screen = mlx_new_window(info->mlx_int, info->res_X,
+			info->res_Y, "screen");
 	if (load_images(info))
 		error_manager(2, info, file);
-	
 	create_img(info);
-	
 	listen_events(info);
-	
 	mlx_loop_hook(info->mlx_int, drawray_3d, info);
-	
 	mlx_loop(info->mlx_int);
-	
 }
 
 void	listen_events(t_info *info)
@@ -63,7 +59,7 @@ int	close_window(t_info *info, t_list *file)
 
 int	main(int argc, char **argv)
 {
-	atexit(leaks);
+	//atexit(leaks);
 	t_info	info;
 	t_list	file;
 	int		returnal;
@@ -105,6 +101,6 @@ void	initialize_ray(t_info *info)
 	info->fov = 180;
 	info->image = 0;
 	info->ray_dir = 0;
-	info->resolution_X = 1920;
-	info->resolution_Y = 1080;
+	info->res_X = 1920;
+	info->res_Y = 1080;
 }

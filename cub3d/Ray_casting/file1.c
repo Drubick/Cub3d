@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file1.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgirondo <rgirondo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/13 17:42:08 by rgirondo          #+#    #+#             */
+/*   Updated: 2022/05/13 17:42:08 by rgirondo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	*canvas_f(t_info *info, char *img_data)
@@ -5,17 +17,17 @@ void	*canvas_f(t_info *info, char *img_data)
 	int	x;
 	int	y;
 
-	y = info->resolution_Y / 2;
-	while (y < info->resolution_Y)
+	y = info->res_Y / 2;
+	while (y < info->res_Y)
 	{
 		x = 0;
-		while (x < (info->resolution_X * 4))
+		while (x < (info->res_X * 4))
 		{
-			img_data[(y * info->resolution_X * 4) + x] = info->F_color[2];
+			img_data[(y * info->res_X * 4) + x] = info->F_color[2];
 			x++;
-			img_data[(y * info->resolution_X * 4) + x] = info->F_color[1];
+			img_data[(y * info->res_X * 4) + x] = info->F_color[1];
 			x++;
-			img_data[(y * info->resolution_X * 4) + x] = info->F_color[0];
+			img_data[(y * info->res_X * 4) + x] = info->F_color[0];
 			x = x + 2;
 		}
 		y++;
@@ -29,16 +41,16 @@ void	*canvas_c(t_info *info, char *img_data)
 	int	y;
 
 	y = 0;
-	while (y < (info->resolution_Y/2))
+	while (y < (info->res_Y / 2))
 	{
 		x = 0;
-		while (x < (info->resolution_X * 4))
+		while (x < (info->res_X * 4))
 		{
-			img_data[(y * info->resolution_X * 4) + x] = info->C_color[2];
+			img_data[(y * info->res_X * 4) + x] = info->C_color[2];
 			x++;
-			img_data[(y * info->resolution_X * 4) + x] = info->C_color[1];
+			img_data[(y * info->res_X * 4) + x] = info->C_color[1];
 			x++;
-			img_data[(y * info->resolution_X * 4) + x] = info->C_color[0];
+			img_data[(y * info->res_X * 4) + x] = info->C_color[0];
 			x = x + 2;
 		}
 		y++;
