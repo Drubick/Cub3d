@@ -84,7 +84,10 @@ typedef struct s_info
 	int		F_color[4];
 	int		C_color[4];
 	int		colision_dir;
-	
+	//fuck norminette
+	int 	i;
+	int		j;
+	char	aux[4];
 }       t_info;
 
 

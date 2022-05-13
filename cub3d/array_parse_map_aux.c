@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   array_parse_map_aux.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/13 18:07:49 by vnastase          #+#    #+#             */
+/*   Updated: 2022/05/13 18:12:45 by vnastase         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	map_check_player(int y, int x, t_info *info)
@@ -59,7 +71,6 @@ void	map_saving(int y, t_info *info)
 		info->map[j] = ft_calloc((info->longest_line), sizeof(char));
 		j++;
 	}
-
 	j = 0;
 	while (info->file[j + y])
 	{

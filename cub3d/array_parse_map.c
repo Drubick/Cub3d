@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   array_parse_map.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/13 18:49:53 by vnastase          #+#    #+#             */
+/*   Updated: 2022/05/13 18:49:53 by vnastase         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 #include <unistd.h>
 
@@ -30,23 +42,17 @@ int	map_check_aux(t_info *info, int y, int x, int error)
 {
 	if (y == info->file_last_line || y == info->file_map_first_line)
 	{
-	
 		if (info->array_spaces[y][x] != '1' &&
 			info->array_spaces[y][x] != ' ' &&
 			info->array_spaces[y][x] != '\n')
-			{
 			return (1);
-			}
 	}
-	
 	if (!ft_strchr(" SE10WN\n", info->array_spaces[y][x]))
 		return (1);
-	
 	else if (info->array_spaces[y][x] != '\n' &&
 		y != info->file_last_line &&
 		y != info->file_map_first_line)
 	{
-		
 		if (info->array_spaces[y][x] == '0')
 			error = map_check_0(info, y, x);
 		else if (ft_strchr("SEWN", info->array_spaces[y][x]))
