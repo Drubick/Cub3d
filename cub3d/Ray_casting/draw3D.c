@@ -24,11 +24,11 @@ int	drawray_3d(t_info *info)
 	mlx_clear_window(info->mlx_int, info->screen);
 	canvas_c(info, info->img_data);
 	canvas_f(info, info->img_data);
-	while (nbr_ray < info->res_X)
+	while (nbr_ray < info->res_x)
 	{
 		info->ray_dir = info->player_direction
 			- atan(tan(((info->fov * M_PI / 180) / 2) / 2.0)
-				* (2.0 * nbr_ray / info->res_X - 1.0));
+				* (2.0 * nbr_ray / info->res_x - 1.0));
 		draw3d_if(info);
 		dist = vertical_coll(info);
 		dist2 = horizontal_coll(info);

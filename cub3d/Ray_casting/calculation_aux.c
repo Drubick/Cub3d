@@ -30,7 +30,7 @@ int	calc_dist(double ray_x, double ray_y, t_info *info)
 	if (not_feye > (2 * info->pi))
 		not_feye -= 2 * info->pi;
 	dist = dist * cos(not_feye);
-	return ((info->res_Y) / (dist));
+	return ((info->res_y) / (dist));
 }
 
 void	vertical_coll_aux(t_info *info, double *ray_x, double *ray_y)

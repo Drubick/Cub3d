@@ -6,7 +6,7 @@
 /*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 19:07:16 by vnastase          #+#    #+#             */
-/*   Updated: 2022/05/13 19:07:18 by vnastase         ###   ########.fr       */
+/*   Updated: 2022/05/13 19:42:46 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	render_map(t_info *info, t_list *file)
 	int	screen_w;
 	int	screen_h;
 
-	screen_w = info->res_X * 32;
-	screen_h = info->res_Y * 32;
+	screen_w = info->res_x * 32;
+	screen_h = info->res_y * 32;
 	info->mlx_int = mlx_init();
-	info->screen = mlx_new_window(info->mlx_int, info->res_X,
-			info->res_Y, "screen");
+	info->screen = mlx_new_window(info->mlx_int, info->res_x,
+			info->res_y, "screen");
 	if (load_images(info))
 		error_manager(2, info, file);
 	create_img(info);
@@ -39,10 +39,10 @@ void	listen_events(t_info *info)
 
 int	close_window(t_info *info, t_list *file)
 {
-	mlx_destroy_image(info->mlx_int, info->images_E.image);
-	mlx_destroy_image(info->mlx_int, info->images_N.image);
-	mlx_destroy_image(info->mlx_int, info->images_S.image);
-	mlx_destroy_image(info->mlx_int, info->images_W.image);
+	mlx_destroy_image(info->mlx_int, info->images_e.image);
+	mlx_destroy_image(info->mlx_int, info->images_n.image);
+	mlx_destroy_image(info->mlx_int, info->images_s.image);
+	mlx_destroy_image(info->mlx_int, info->images_w.image);
 	mlx_destroy_window(info->mlx_int, info->screen);
 	free_memory(info, file);
 	(void)file;

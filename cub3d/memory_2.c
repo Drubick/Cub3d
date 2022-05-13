@@ -6,7 +6,7 @@
 /*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 19:12:54 by vnastase          #+#    #+#             */
-/*   Updated: 2022/05/13 19:13:19 by vnastase         ###   ########.fr       */
+/*   Updated: 2022/05/13 19:42:31 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	load_images(t_info *info)
 {
-	if (load_image_aux(&info->images_E, info->E_texture_path, info->mlx_int)
-		|| load_image_aux(&info->images_W, info->W_texture_path, info->mlx_int)
-		|| load_image_aux(&info->images_S, info->S_texture_path, info->mlx_int)
-		|| load_image_aux(&info->images_N, info->N_texture_path, info->mlx_int))
+	if (load_image_aux(&info->images_e, info->e_texture_path, info->mlx_int)
+		|| load_image_aux(&info->images_w, info->w_texture_path, info->mlx_int)
+		|| load_image_aux(&info->images_s, info->s_texture_path, info->mlx_int)
+		|| load_image_aux(&info->images_n, info->n_texture_path, info->mlx_int))
 		return (1);
-	if (!info->images_E.image && !info->images_W.image
-		&& !info->images_N.image
-		&& !info->images_S.image)
+	if (!info->images_e.image && !info->images_w.image
+		&& !info->images_n.image
+		&& !info->images_s.image)
 		return (1);
 	return (0);
 }

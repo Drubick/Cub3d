@@ -6,7 +6,7 @@
 /*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:13:03 by vnastase          #+#    #+#             */
-/*   Updated: 2022/05/13 18:45:18 by vnastase         ###   ########.fr       */
+/*   Updated: 2022/05/13 20:00:35 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int	save_rgb_c(t_info *info, int rgb)
 {
-	info->C_color[rgb] = ft_atoi(info->aux);
-	if (info->C_color[rgb] < 0 || info->C_color[rgb] > 255)
+	info->c_color[rgb] = ft_atoi(info->aux);
+	if (info->c_color[rgb] < 0 || info->c_color[rgb] > 255)
 		return (1);
 	return (0);
 }
 
 int	save_rgb_f(t_info *info, int rgb)
 {
-	info->F_color[rgb] = ft_atoi(info->aux);
-	if (info->F_color[rgb] < 0 || info->F_color[rgb] > 255)
+	info->f_color[rgb] = ft_atoi(info->aux);
+	if (info->f_color[rgb] < 0 || info->f_color[rgb] > 255)
 		return (1);
 	return (0);
 }
@@ -36,13 +36,13 @@ int	separate_rgb_aux(int rgb, int *x, t_info *info)
 	{
 		if (save_rgb_c(info, *x))
 			return (1);
-			info->C_color[3] = 0;
+			info->c_color[3] = 0;
 	}
 	else
 	{
 		if (save_rgb_f(info, *x))
 			return (1);
-		info->F_color[3] = 0;
+		info->f_color[3] = 0;
 	}
 	info->j = 0;
 	info->i++;
@@ -60,10 +60,11 @@ int	separate_rgb(char *texture, t_info *info, int rgb)
 	while (texture[info->i] && x <= 2)
 	{
 		while (texture[info->i] != ',' && texture[info->i]
-			&& texture[info->i] != ' '
-			&& texture[info->i] != '\n'
+			&& texture[info->i] != ' ' && texture[info->i] != '\n'
 			&& texture[info->i])
 		{
+			if (!ft_isdigit(texture[info->i]))
+				return (1);
 			info->aux[info->j] = texture[info->i];
 			info->j++;
 			info->i++;

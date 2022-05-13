@@ -6,7 +6,7 @@
 /*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:45:53 by vnastase          #+#    #+#             */
-/*   Updated: 2022/05/13 18:49:21 by vnastase         ###   ########.fr       */
+/*   Updated: 2022/05/13 19:45:11 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ int	texture_w(char *texture, t_info *info)
 	x = 3;
 	if (ft_strncmp("WE ", texture, 3) != 0)
 		return (1);
-	info->W_texture_path = ft_calloc((ft_strlen(texture) - 2), sizeof(char));
+	info->w_texture_path = ft_calloc((ft_strlen(texture) - 2), sizeof(char));
 	while (texture[x])
 	{
-		info->W_texture_path[x - 3] = texture[x];
+		info->w_texture_path[x - 3] = texture[x];
 		x++;
 	}
-	info->W_texture_path[x - 4] = '\0';
+	info->w_texture_path[x - 4] = '\0';
 	info->is_w_texture++;
 	if (info->is_w_texture > 1)
 		return (1);
@@ -55,13 +55,13 @@ int	texture_e(char *texture, t_info *info)
 	x = 3;
 	if (ft_strncmp("EA ", texture, 3) != 0)
 		return (1);
-	info->E_texture_path = ft_calloc((ft_strlen(texture) - 2), sizeof(char));
+	info->e_texture_path = ft_calloc((ft_strlen(texture) - 2), sizeof(char));
 	while (texture[x])
 	{
-		info->E_texture_path[x - 3] = texture[x];
+		info->e_texture_path[x - 3] = texture[x];
 		x++;
 	}
-	info->E_texture_path[x - 4] = '\0';
+	info->e_texture_path[x - 4] = '\0';
 	info->is_e_texture++;
 	if (info->is_e_texture > 1)
 		return (1);

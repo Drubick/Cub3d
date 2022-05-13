@@ -19,8 +19,8 @@ int	create_img(t_info *info)
 	int			endian;
 
 	mlx_clear_window(info->mlx_int, info->screen);
-	info->image = mlx_new_image(info->mlx_int, info->res_X,
-			info->res_Y);
+	info->image = mlx_new_image(info->mlx_int, info->res_x,
+			info->res_y);
 	info->img_data = mlx_get_data_addr(info->image, &bpp, &size_line, &endian);
 	return (1);
 }
@@ -40,15 +40,15 @@ int	draw_vertical(t_info *info, int x, int dist)
 	px = NULL;
 	px2 = NULL;
 	y_ratio = 0;
-	i = info->res_Y / 2 - 1;
-	while (i && i > info->res_Y / 2 - dist / 2)
+	i = info->res_y / 2 - 1;
+	while (i && i > info->res_y / 2 - dist / 2)
 	{
-		y_ratio = (info->res_Y / 2 - i) / (float)dist;
+		y_ratio = (info->res_y / 2 - i) / (float)dist;
 		px = get_image_pixel_addr(info, -y_ratio);
-		px2 = px_ad(info->img_data, x, i, info->res_X);
+		px2 = px_ad(info->img_data, x, i, info->res_x);
 		draw_pixel(px2, px[2], px[1], px[0]);
 		px = get_image_pixel_addr(info, y_ratio);
-		px2 = px_ad(info->img_data, x, info->res_Y - i - 1, info->res_X);
+		px2 = px_ad(info->img_data, x, info->res_y - i - 1, info->res_x);
 		draw_pixel(px2, px[2], px[1], px[0]);
 		i--;
 	}
@@ -64,13 +64,13 @@ char	*get_image_pixel_addr(t_info *info, float y_ratio)
 	y_ratio += 0.5;
 	img_pointer = NULL;
 	if (info->colision_dir == 4)
-		img_pointer = &info->images_N;
+		img_pointer = &info->images_n;
 	else if (info->colision_dir == 3)
-		img_pointer = &info->images_W;
+		img_pointer = &info->images_w;
 	else if (info->colision_dir == 2)
-		img_pointer = &info->images_S;
+		img_pointer = &info->images_s;
 	else
-		img_pointer = &info->images_E;
+		img_pointer = &info->images_e;
 	x = img_pointer->width * info->shortest_collision;
 	y = img_pointer->height * y_ratio;
 	if (y < 1)

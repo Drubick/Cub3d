@@ -6,12 +6,17 @@
 /*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 19:05:03 by vnastase          #+#    #+#             */
-/*   Updated: 2022/05/13 19:07:04 by vnastase         ###   ########.fr       */
+/*   Updated: 2022/05/13 19:49:45 by vnastase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+
+void	leaks()
+{
+	system("leaks cub_3d");
+}
 void	error_manager(int conditional, t_info *info, t_list *file)
 {
 	if (conditional == 1)
@@ -24,6 +29,7 @@ void	error_manager(int conditional, t_info *info, t_list *file)
 
 int	main(int argc, char **argv)
 {
+	atexit(leaks);
 	t_info	info;
 	t_list	file;
 	int		returnal;
@@ -51,10 +57,10 @@ void	initialize_info(t_info *info)
 	info->map = NULL;
 	info->file = NULL;
 	info->array_spaces = NULL;
-	info->N_texture_path = NULL;
-	info->S_texture_path = NULL;
-	info->E_texture_path = NULL;
-	info->W_texture_path = NULL;
+	info->n_texture_path = NULL;
+	info->s_texture_path = NULL;
+	info->e_texture_path = NULL;
+	info->w_texture_path = NULL;
 	initialize_ray(info);
 }
 
@@ -65,6 +71,6 @@ void	initialize_ray(t_info *info)
 	info->fov = 180;
 	info->image = 0;
 	info->ray_dir = 0;
-	info->res_X = 1920;
-	info->res_Y = 1080;
+	info->res_x = 1920;
+	info->res_y = 1080;
 }

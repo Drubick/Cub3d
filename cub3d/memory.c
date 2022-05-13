@@ -31,14 +31,14 @@ void	free_memory(t_info *info, t_list *file)
 
 void	free_textures(t_info *info)
 {
-	if (info->N_texture_path)
-		free (info->N_texture_path);
-	if (info->S_texture_path)
-		free (info->S_texture_path);
-	if (info->E_texture_path)
-		free (info->E_texture_path);
-	if (info->W_texture_path)
-		free (info->W_texture_path);
+	if (info->n_texture_path)
+		free (info->n_texture_path);
+	if (info->s_texture_path)
+		free (info->s_texture_path);
+	if (info->e_texture_path)
+		free (info->e_texture_path);
+	if (info->w_texture_path)
+		free (info->w_texture_path);
 }
 
 /*

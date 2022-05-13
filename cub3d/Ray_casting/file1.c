@@ -17,17 +17,17 @@ void	*canvas_f(t_info *info, char *img_data)
 	int	x;
 	int	y;
 
-	y = info->res_Y / 2;
-	while (y < info->res_Y)
+	y = info->res_y / 2;
+	while (y < info->res_y)
 	{
 		x = 0;
-		while (x < (info->res_X * 4))
+		while (x < (info->res_x * 4))
 		{
-			img_data[(y * info->res_X * 4) + x] = info->F_color[2];
+			img_data[(y * info->res_x * 4) + x] = info->f_color[2];
 			x++;
-			img_data[(y * info->res_X * 4) + x] = info->F_color[1];
+			img_data[(y * info->res_x * 4) + x] = info->f_color[1];
 			x++;
-			img_data[(y * info->res_X * 4) + x] = info->F_color[0];
+			img_data[(y * info->res_x * 4) + x] = info->f_color[0];
 			x = x + 2;
 		}
 		y++;
@@ -41,16 +41,16 @@ void	*canvas_c(t_info *info, char *img_data)
 	int	y;
 
 	y = 0;
-	while (y < (info->res_Y / 2))
+	while (y < (info->res_y / 2))
 	{
 		x = 0;
-		while (x < (info->res_X * 4))
+		while (x < (info->res_x * 4))
 		{
-			img_data[(y * info->res_X * 4) + x] = info->C_color[2];
+			img_data[(y * info->res_x * 4) + x] = info->c_color[2];
 			x++;
-			img_data[(y * info->res_X * 4) + x] = info->C_color[1];
+			img_data[(y * info->res_x * 4) + x] = info->c_color[1];
 			x++;
-			img_data[(y * info->res_X * 4) + x] = info->C_color[0];
+			img_data[(y * info->res_x * 4) + x] = info->c_color[0];
 			x = x + 2;
 		}
 		y++;

@@ -94,13 +94,13 @@ int	texture_n(char *texture, t_info *info)
 	x = 3;
 	if (ft_strncmp("NO ", texture, 3) != 0)
 		return (1);
-	info->N_texture_path = ft_calloc((ft_strlen(texture) - 2), sizeof(char));
+	info->n_texture_path = ft_calloc((ft_strlen(texture) - 2), sizeof(char));
 	while (texture[x])
 	{
-		info->N_texture_path[x - 3] = texture[x];
+		info->n_texture_path[x - 3] = texture[x];
 		x++;
 	}
-	info->N_texture_path[x - 4] = '\0';
+	info->n_texture_path[x - 4] = '\0';
 	info->is_n_texture++;
 	if (info->is_n_texture > 1)
 		return (1);
@@ -117,13 +117,13 @@ int	texture_s(char *texture, t_info *info)
 	x = 3;
 	if (ft_strncmp("SO ", texture, 3) != 0)
 		return (1);
-	info->S_texture_path = ft_calloc((ft_strlen(texture) - 2), sizeof(char));
+	info->s_texture_path = ft_calloc((ft_strlen(texture) - 2), sizeof(char));
 	while (texture[x])
 	{
-		info->S_texture_path[x - 3] = texture[x];
+		info->s_texture_path[x - 3] = texture[x];
 		x++;
 	}
-	info->S_texture_path[x - 4] = '\0';
+	info->s_texture_path[x - 4] = '\0';
 	info->is_s_texture++;
 	if (info->is_s_texture > 1)
 		return (1);
