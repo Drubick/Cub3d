@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_aux.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/13 19:13:47 by vnastase          #+#    #+#             */
+/*   Updated: 2022/05/13 19:14:06 by vnastase         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	get_longest_line(t_info *info)
@@ -63,7 +75,7 @@ void	fill_with_spaces_aux(t_info *info, int *i, int *j)
 			*i += 1;
 	}
 	info->array_spaces[*j][*i - 1] = '\n';
-	info->array_spaces[*j][*i]  = '\0';
+	info->array_spaces[*j][*i] = '\0';
 }
 
 void	info_to_array_aux(t_info *info)

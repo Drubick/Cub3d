@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/13 19:13:37 by vnastase          #+#    #+#             */
+/*   Updated: 2022/05/13 19:15:15 by vnastase         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 #include <unistd.h>
 #include <fcntl.h>
@@ -10,30 +22,25 @@ error code 1 = wrong number of files while starting the program
 */
 int	valid_map_file(char const *argv)
 {
-	
 	int	i;
 
 	i = ft_strlen(argv);
 	if (i < 5)
-		return(1);
+		return (1);
 	if (ft_strncmp(&(argv[i - 4]), ".cub", 4))
-		return(1);
-	return(0);
+		return (1);
+	return (0);
 }
 
 int	parse(t_info *info, char**argv, char argc, t_list *file)
 {
-
 	if (argc != 2)
 		info->parse = 1;
 	if (valid_map_file(argv[1]))
-		return(1);
+		return (1);
 	if (file_scan(file, argv[1], info))
-		return(1);
-		
+		return (1);
 	info->parse = arry_parse(info);
-	
-	
 	return (info->parse);
 }
 /*
@@ -56,22 +63,17 @@ int	file_scan(t_list *file_list, char *file, t_info *info)
 	{
 		control_line = get_next_line(file_descriptor, &buffer);
 		ft_lstadd_back(&file_list, ft_lstnew(buffer));
-	
 	}
-	
 	close(file_descriptor);
 	info_to_array(info, file_list);
-
 	return (0);
-
-	
 }
 
 void	info_to_array(t_info *info, t_list *file_list)
 {
-	int	j;
-	int	i;
-	t_list *aux;
+	int		j;
+	int		i;
+	t_list	*aux;
 
 	aux = file_list;
 	j = 0;
@@ -91,8 +93,6 @@ void	info_to_array(t_info *info, t_list *file_list)
 		j++;
 	}
 	file_list = aux;
-	
-
 	ft_lstclear(&file_list, free);
 	fill_with_spaces(info);
 }

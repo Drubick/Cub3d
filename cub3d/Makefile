@@ -15,7 +15,9 @@ SRCS 			=  main.c\
 					Ray_casting/file1.c\
 					Ray_casting/mlx_aux.c\
 					Ray_casting/mlx_keys.c\
-					array_parse_aux_2.c
+					array_parse_aux_2.c\
+					memory_2.c\
+					rendering.c
 
 OBJS				= main.o\
 					parse.o\
@@ -31,7 +33,9 @@ OBJS				= main.o\
 					Ray_casting/file1.o\
 					Ray_casting/mlx_aux.o\
 					Ray_casting/mlx_keys.o\
-					array_parse_aux_2.o
+					array_parse_aux_2.o\
+					memory_2.o\
+					rendering.o
 
 CC					= gcc
 CFLAGS  			= -Wall -Wextra -Werror -Ilibft -I../libft -I.

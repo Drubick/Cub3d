@@ -1,12 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnastase <vnastase@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/13 19:03:38 by vnastase          #+#    #+#             */
+/*   Updated: 2022/05/13 19:16:58 by vnastase         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
-
 # include "libft.h"
-#include <math.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <mlx.h>
-#include <stdio.h>
+# include <math.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <mlx.h>
+# include <stdio.h>
 # define PI 3.141592
 # define ESC_KEY			65307
 # define ARROW_LEFT_KEY		65361
@@ -121,6 +132,7 @@ int 	map_check_player(int y, int x, t_info *info);
 int 	map_check_space( t_info *info, int y, int x);
 int		map_check_aux(t_info *info, int y, int x, int error);
 void    transform_direction_radian(char direction, t_info *info);
+void	error_manager(int conditional, t_info *info, t_list *file);
 int		valid_map_file(char const *argv);
 //memory
 void	initialize_info(t_info *info);
